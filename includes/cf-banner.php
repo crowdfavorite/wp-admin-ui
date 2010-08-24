@@ -4,4 +4,6 @@
 		<p><a href="" id="wphc-close">close</a></p>
 	</div><!-- .cf-box-content -->
 </div><!-- #cf-support-widget -->
-<p><a href="" class="wphc-support-btn">Support</a></p>
+<div id="cf-header">
+	<p><a href="" class="wphc-support-btn">Support</a></p>
+</div><!-- #cf-options-tabs -->
