@@ -1,0 +1,233 @@
+
+/* Forms
+-------------------------------------------------- */
+
+#cf fieldset {
+	margin-bottom: 1.5em;
+}
+#cf legend {
+	font-size: 14px;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+/* overwrite default WP spacing for this class */
+#cf p.submit {
+	margin: 12px 0 0 0;
+	padding: 0;
+}
+
+/* wrapper for labels and form elements */
+.elm-block {
+	clear: both;
+	margin: 3px 0;
+	padding: 3px 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+form .elm-block:hover {
+	background-color: #f3f3f3;
+}
+.elm-block.active {
+	background-color: #eee;
+}
+
+.elm-date,
+.elm-readonly,
+.elm-hidden,
+.elm-text,
+.elm-password,
+.elm-select,
+.elm-textarea {
+	font-size: 12px;
+	padding: 3px;
+}
+
+.elm-help {
+	color: #888;
+}
+span.elm-checkbox,
+span.elm-flag,
+span.elm-date,
+span.elm-readonly,
+span.elm-hidden,
+span.elm-text,
+span.elm-password,
+span.elm-select,
+div.elm-textarea {
+	padding: 3px 0;
+}
+
+span.elm-checkbox,
+span.elm-flag,
+label.lbl-checkbox,
+label.lbl-flag,
+label.lbl-radio {
+	color: #333;
+	font-size: 12px;
+}
+.view label.lbl-checkbox,
+.view label.lbl-flag,
+.view label.lbl-radio {
+	color: #555;
+	font-size: 11px;
+}
+
+.lbl-pos-top .lbl-date,
+.lbl-pos-top .lbl-readonly,
+.lbl-pos-top .lbl-hidden,
+.lbl-pos-top .lbl-text,
+.lbl-pos-top .lbl-textarea,
+.lbl-pos-top .lbl-select,
+.lbl-pos-top .lbl-password {
+	display: block;
+}
+.lbl-pos-top label.lbl-checkbox,
+.lbl-pos-top label.lbl-flag,
+.lbl-pos-top label.lbl-radio {
+	cursor: pointer;
+	display: inline;
+}
+
+.lbl-pos-left .elm-block {
+	clear: both;
+}
+.lbl-pos-left label,
+.lbl-pos-left .view label.lbl-checkbox,
+.lbl-pos-left .view label.lbl-flag,
+.lbl-pos-left .view label.lbl-radio {
+	width: 30%; /* needs to match .lbl-left .elm-* margin-left */
+	float: left;
+}
+.lbl-pos-left label, 
+.lbl-pos-left span.view {
+	padding-top: 3px;
+}
+.lbl-pos-left span.view {
+	display: inline-block;
+}
+.lbl-pos-left label.lbl-checkbox,
+.lbl-pos-left label.lbl-flag,
+.lbl-pos-left label.lbl-radio {
+	width: auto;
+	padding-top: 0;
+	float: none;
+}
+.lbl-pos-left .elm-checkbox,
+.lbl-pos-left .elm-flag,
+.lbl-pos-left .elm-radio {
+	margin-left: 30%; /* needs to match .lbl-left .lbl-* width */
+}
+/* remainging labels left for view only */
+.lbl-pos-left .view label.lbl-checkbox,
+.lbl-pos-left .view label.lbl-flag,
+.lbl-pos-left .view label.lbl-radio {
+	color: #555;
+	font-size: 11px;
+	padding-top: 3px;
+}
+
+/* Set form element width's */
+.elm-width-300 .elm-text,
+.elm-width-300 .elm-password,
+.elm-width-300 .elm-textarea {
+	width: 300px;
+}
+.elm-width-500 .elm-text,
+.elm-width-500 .elm-password,
+.elm-width-500 .elm-textarea {
+	width: 500px;
+}
+.elm-width-200 .elm-text,
+.elm-width-200 .elm-password,
+.elm-width-200 .elm-textarea {
+	width: 200px;
+}
+.elm-width-50 .elm-text,
+.elm-width-50 .elm-password,
+.elm-width-50 .elm-textarea {
+	width: 40px;
+}
+.elm-width-100 .elm-text,
+.elm-width-100 .elm-password,
+.elm-width-100 .elm-textarea {
+	width: 100px;
+}
+.elm-width-full .elm-text,
+.elm-width-full .elm-password,
+.elm-width-full .elm-textarea {
+	/**
+	 * Box model CSS3 change
+	 * @see http://www.quirksmode.org/css/box.html
+	 * Additional workaround in IE7.css
+	 */
+	-moz-box-sizing: border-box; /* FF1+ */
+	-webkit-box-sizing: border-box; /* Saf3+ */
+	box-sizing: border-box; /* Standard. Opera7+, IE8+ */
+	width: 99%;
+}
+.lbl-pos-left .elm-width-full .elm-text,
+.lbl-pos-left .elm-width-full .elm-password,
+.lbl-pos-left .elm-width-full .elm-textarea {
+	width: 69%;
+}
+/* Set form element heights (textarea) */
+.elm-height-60 .elm-textarea {
+	height: 60px;
+}
+.elm-height-100 .elm-textarea {
+	height: 100px;
+}
+.elm-height-500 .elm-textarea {
+	height: 500px;
+}
+
+/* checkbox and radio lists */
+.lbl-checkbox-group,
+.lbl-radio-group {
+	font-size: 1em;
+}
+.has-checkbox ul,
+.has-radio ul {
+	list-style-type: none;
+	margin-left: 0;
+}
+.has-checkbox li,
+.has-radio li {
+	overflow: hidden;
+}
+
+li .elm-checkbox,
+li .elm-radio {
+	float: left;
+	margin: 1px;
+	vertical-align: middle;
+}
+li .lbl-checkbox,
+li .lbl-radio {
+	display: block;
+	padding-left: 7px;
+}
+
+.lbl-hide label,
+label.lbl-hide {
+	display: none;
+}
+
+
+/* notifications */
+.cf-error { 
+	background:#fbe3e4 !important; 
+	color:#8a1f11;
+}
+.cf-notice { 
+	background:#fff6bf !important;
+	color:#514721;
+}
+.cf-success {
+	background:#e4ffc9 !important;
+	color:#264409;
+}
+.cf-error a { color:#8a1f11; }
+.cf-notice a { color:#514721; }
+.cf-success a { color:#264409; }

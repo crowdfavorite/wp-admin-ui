@@ -1,0 +1,184 @@
+/* --------------------------------------------------
+  			Standard Utility Classes
+-------------------------------------------------- */
+
+/* Hiding
+-------------------------------------------------- */
+.hidden {
+	display: none;
+}
+.invisible {
+	visibility: hidden;
+}
+.dim {
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+}
+
+/* Clearing
+-------------------------------------------------- */
+/* Clearing floats without extra markup [http: //www.positioniseverything.net/easyclearing.html] */
+.clearfix {
+	display: block;
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clear {
+	clear: both;
+	float: none;
+	height: 1px;
+}
+
+/* Display
+-------------------------------------------------- */
+.block {
+	display: block;
+}
+.inline {
+	display: inline;
+}
+
+/* Alignment/Layout
+-------------------------------------------------- */
+.txt-left {
+	text-align: left;
+}
+.txt-right {
+	text-align: right;
+}
+.txt-center {
+	text-align: center;
+}
+
+.flt-left {
+	float: left;
+}
+.flt-right {
+	float: right;
+}
+.no-wrap {
+	white-space: nowrap;
+}
+
+/* Links
+-------------------------------------------------- */
+.lnk-remove:hover,
+.lnk-delete:hover {
+	color: #c00;
+}
+
+/* Margins/Padding
+-------------------------------------------------- */
+.mar-none {
+	margin: 0;
+}
+.mar-bottom-none {
+	margin-bottom: 0;
+}
+.mar-bottom-single {
+	margin-bottom: 15px;
+}
+.mar-bottom-double {
+	margin-bottom: 30px;
+}
+.mar-top-none {
+	margin-top: 0 !important;
+}
+.mar-top-single {
+	margin-top: 15px;
+}
+.mar-top-double {
+	margin-top: 30px;
+}
+.mar-left-single {
+	margin-left: 15px;
+}
+.mar-right-single {
+	margin-right: 15px;
+}
+
+.pad-none {
+	padding: 0;
+}
+.pad-single {
+	padding: 15px;
+}
+.pad-double {
+	padding: 30px;
+}
+.pad-bottom-none {
+	padding-bottom: 0;
+}
+.pad-bottom-single {
+	padding-bottom: 15px;
+}
+.pad-bottom-double {
+	padding-bottom: 30px;
+}
+.pad-top-none {
+	padding-top: 0;
+}
+.pad-top-single {
+	padding-top: 15px;
+}
+.pad-top-double {
+	padding-top: 30px;
+}
+
+/* Borders
+-------------------------------------------------- */
+.bdr-top {
+	border-top: 1px solid #ccc;
+}
+.bdr-btm {
+	border-bottom: 1px solid #ccc;
+}
+
+/* Typography
+-------------------------------------------------- */
+.typ-intro {
+	font-size:14px;
+}
+.typ-caps {
+	font-size: 0.9em;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+.typ-small {
+	font-size: 11px;
+	line-height: 1.4em;
+}
+.typ-x-small {
+	font-size: 10px;
+	line-height: 1.4em;
+}
+.typ-xx-small {
+	font-size: 9px;
+	line-height: 1.4em;
+}
+.typ-quiet {
+	color: #999;
+}
+
+/* List Styles
+-------------------------------------------------- */
+.lst-none {
+	list-style-type: none;
+	margin-left: 0;
+}
+.lst-inline li {
+	display: inline-block;
+}
+dl.lst-inline dt,
+dl.lst-inline dd {
+	display: inline;
+}
+dl.lst-inline dd {
+	margin: 0 10px 0 0;
+	padding: 0;
+}
