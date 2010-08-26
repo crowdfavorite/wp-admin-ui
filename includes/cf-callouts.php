@@ -3,11 +3,11 @@
 	// Bad for testing, works for deployment
 						    //dir name	  plugin dir   working-html   includes  cf-callouts
 	$this_plugin_dir_name = basename(     dirname(   	 dirname(       dirname(   __FILE__   ))));
-	
+	$this_plugin_dir_name = trailingslashit($this_plugin_dir_name);
 	if ($this_plugin_dir_name == basename(WP_PLUGIN_DIR)) {
 		$this_plugin_dir_name = '';
 	}
-	$url_to_img_dir = trailingslashit(WP_PLUGIN_URL) . trailingslahsit($this_plugin_dir_name) . 'working-html/img/';
+	$url_to_img_dir = trailingslashit(WP_PLUGIN_URL) . $this_plugin_dir_name . 'working-html/img/';
 
 print_r('
 		<div id="cf-callouts">
