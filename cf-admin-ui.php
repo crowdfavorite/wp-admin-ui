@@ -28,10 +28,16 @@ if ( ! class_exists('CF_Admin_UI')) {
 		}
 		function cf_load_css()
 		{
-			
+			//Change this to wp_enqueue_style once we host our css
+			$cf_styles = trailingslashit(CFMOBI_HTML_URL) . 'css/styles.css';
+			$cf_form_elements = trailingslashit(CFMOBI_HTML_URL) . 'css/form-elements.css';  
+			echo '<link rel="stylesheet" type="text/css" href="' . $cf_styles . '" />';
+			echo '<link rel="stylesheet" type="text/css" href="' . $cf_form_elements . '" />';
 		}
 		function cf_load_js()
 		{
+			wp_enqueue_script('cf_admin_cookie_js', 'js/jquery.cookie.js', array('jquery'));
+			wp_enqueue_script('cf_js_script', 'js/scripts.js', array('jquery'));
 			
 		}
 		function cf_settings_field($key, $config) {
