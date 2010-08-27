@@ -5,6 +5,7 @@
 #cf-header {
 	background: url('../img/border-fade-sprite.gif') 0 100% repeat-x;
 	float: left;
+	min-height: 30px;
 	margin-bottom: 18px;
 	position: relative;
 	width: 100%;
