@@ -6,7 +6,7 @@
 			<fieldset class="lbl-pos-left">
 	');
 	foreach ($settings as $key => $config) {
-		echo CF_Admin_UI::cf_settings_field($key, $config);
+		echo self::cf_settings_field($key, $config);
 	}
 	print('
 			</fieldset>

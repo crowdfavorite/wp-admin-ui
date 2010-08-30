@@ -1,7 +1,6 @@
 #cf {
 }
 
-
 #cf-header {
 	background: url('../img/border-fade-sprite.gif') 0 100% repeat-x;
 	float: left;
@@ -12,7 +11,7 @@
 }
 .wphc-support-btn {
 	display: block;
-	background: url(../img/support-btn.gif) 0 0 no-repeat;
+	background: url('../img/support-btn.gif') 0 0 no-repeat;
 	height: 18px;
 	overflow: hidden;
 	position: absolute;

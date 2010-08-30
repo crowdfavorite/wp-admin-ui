@@ -1,17 +1,35 @@
 <?php
 if ( ! class_exists('CF_Admin_UI')) {
 	Class CF_Admin_UI {
-
-		function cf_callouts() {
-			// A terrible hack until cloud hosted images or widgets for absolute URLs
-			// Bad for testing, works for deployment
-								   //dir name	  plugin dir   working-html   includes  cf-callouts
-			$this_plugin_dir_name = basename(     dirname(   	 dirname(       dirname(   __FILE__   ))));
-			$this_plugin_dir_name = trailingslashit($this_plugin_dir_name);
-			if ($this_plugin_dir_name == basename(WP_PLUGIN_DIR)) {
-				$this_plugin_dir_name = '';
+				
+		function cf_path_to_adminui() {
+			if (defined('CF_TEST_DIR')) {
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'admin-ui/';
 			}
-			$url_to_img_dir = trailingslashit(WP_PLUGIN_URL) . $this_plugin_dir_name . 'working-html/img/';
+			$plugin_dir = basename( dirname( dirname(__FILE__)));
+			if ($plugin_dir == basename(WP_PLUGIN_DIR)) {
+				return trailingslashit(WP_PLUGIN_DIR) . 'admin-ui/';
+			}
+			else {
+				return 	trailingslashit(WP_PLUGIN_DIR) . trailingslashit($plugin_dir) . 'admin-ui/';
+			}
+		}
+		
+		function cf_url_to_adminui() {
+			if (defined('CF_TEST_DIR')) {
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'admin-ui/';
+			}
+			$plugin_dir_name = basename( dirname( dirname(__FILE__)));
+			if ($plugin_dir_name == basename(WP_PLUGIN_DIR)) {
+				return trailingslashit(WP_PLUGIN_URL) . 'admin-ui/';
+			}
+			else {
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit($plugin_dir_name) . 'admin-ui/';
+			}
+		}
+		
+		function cf_callouts() {
+			$img_dir_url = self::cf_url_to_adminui() . 'img/';
 		
 			echo '<div id="cf-callouts">';
 			include 'includes/wphc-callout.php';
@@ -26,20 +44,20 @@ if ( ! class_exists('CF_Admin_UI')) {
 		function cf_settings_form($settings, $plugin_slug, $text_domain) {
 			include 'includes/cf-settings-form.php';
 		}
-		function cf_load_css()
-		{
-			//Change this to wp_enqueue_style once we host our css
-			$cf_styles = trailingslashit(CFMOBI_HTML_URL) . 'css/styles.css';
-			$cf_form_elements = trailingslashit(CFMOBI_HTML_URL) . 'css/form-elements.css';  
-			echo '<link rel="stylesheet" type="text/css" href="' . $cf_styles . '" />';
-			echo '<link rel="stylesheet" type="text/css" href="' . $cf_form_elements . '" />';
+		
+		function cf_load_css() {
+			$css_url = self::cf_url_to_adminui() . 'css/';
+			wp_enqueue_style('cf_styles', $css_url . 'styles.css');
+			wp_enqueue_style('cf_form_elements', $css_url . 'form-elements.css');
 		}
-		function cf_load_js()
-		{
-			wp_enqueue_script('cf_admin_cookie_js', 'js/jquery.cookie.js', array('jquery'));
-			wp_enqueue_script('cf_js_script', 'js/scripts.js', array('jquery'));
+		
+		function cf_load_js() {
+			$js_url = self::cf_url_to_adminui() . 'js/';
+			wp_enqueue_script('cf_admin_cookie_js', $js_url .'jquery.cookie.js', array('jquery'));
+			wp_enqueue_script('cf_js_script', $js_url.'scripts.js', array('jquery'));
 			
 		}
+		
 		function cf_settings_field($key, $config) {
 			$option = get_option($key);
 			$label = '<label for="'.$key.'">'.$config['label'].'</label>';
@@ -70,7 +88,7 @@ if ( ! class_exists('CF_Admin_UI')) {
 			}
 			return '<div class="elm-block elm-width-300">' . $output.'</div>';
 		}
+		
 	}
 }
-
 ?>
