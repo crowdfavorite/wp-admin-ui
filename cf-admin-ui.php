@@ -83,7 +83,7 @@ if ( ! class_exists('CF_Admin_UI')) {
 				case 'int':
 				default:
 					$label = '<label for="'.$key.'" class="lbl-text">'.$config['label'].'</label>';
-					$output = $label.'<input name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="elm-text" /><div class="elm-help">' . $help . '</div>';
+					$output = $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="elm-text" /><div class="elm-help">' . $help . '</div>';
 					break;
 			}
 			return '<div class="elm-block elm-width-300">' . $output.'</div>';
