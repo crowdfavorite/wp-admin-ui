@@ -61,7 +61,7 @@ if ( ! class_exists('CF_Admin_UI')) {
 		function cf_settings_field($key, $config) {
 			$option = get_option($key);
 			$label = '<label for="'.$key.'">'.$config['label'].'</label>';
-			$help = '<span class="help">'.$config['help'].'</span>';
+			$help = $config['help'];
 			switch ($config['type']) {
 				case 'select':
 					$label = '<label for="'.$key.'" class="lbl-select">'.$config['label'].'</label>';
@@ -82,7 +82,7 @@ if ( ! class_exists('CF_Admin_UI')) {
 				case 'string':
 				case 'int':
 				default:
-					$label = '<label for="'.$key.'">'.$config['label'].'</label>';
+					$label = '<label for="'.$key.'" class="lbl-text">'.$config['label'].'</label>';
 					$output = $label.'<input name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="elm-text" /><div class="elm-help">' . $help . '</div>';
 					break;
 			}
