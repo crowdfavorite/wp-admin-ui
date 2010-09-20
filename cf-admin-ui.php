@@ -66,9 +66,9 @@ if ( ! class_exists('CF_Admin_UI')) {
 				case 'select':
 					$label = '<label for="'.$key.'" class="lbl-select">'.$config['label'].'</label>';
 					$output = $label.'<select name="'.$key.'" id="'.$key.'" class="elm-select">';
-					foreach ($config['options'] as $val => $display) {
+					foreach ($config['options'] as $val) {
 						$option == $val ? $sel = ' selected="selected"' : $sel = '';
-						$output .= '<option value="'.$val.'"'.$sel.'>'.$display.'</option>';
+						$output .= '<option value="'.$val.'"'.$sel.'>'.$val.'</option>';
 					}
 					$output .= '</select><span class="elm-help">' . $help . '</span>';
 					break;
