@@ -67,10 +67,12 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		function cf_start_form($plugin_slug) {
+			echo '<div id="cf">'; //closed in cf_end_form_submit
 			include 'includes/cf-start-form.php';
 		}
 		function cf_end_form_submit($plugin_slug, $text_domain) {
 			include 'includes/cf-end-form-submit.php';
+			echo '</div>'; // id="cf" 
 		}
 		
 		function cf_settings_form($settings, $plugin_slug, $text_domain) {
