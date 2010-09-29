@@ -72,7 +72,7 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		function cf_end_form_submit($plugin_slug, $text_domain) {
 			include 'includes/cf-end-form-submit.php';
-			echo '</div>'; // id="cf" 
+			echo '</div>'; // #cf 
 		}
 		
 		function cf_settings_form($settings, $plugin_slug, $text_domain) {
@@ -108,7 +108,7 @@ if ( ! class_exists('CF_Admin')) {
 			switch ($config['type']) {
 				case 'select':
 					$label = '<label for="'.$key.'" class="lbl-select">'.$config['label'].'</label>';
-					$output = $label.'<select name="'.$key.'" id="'.$key.'" class="elm-select">';
+					$output .= $label.'<select name="'.$key.'" id="'.$key.'" class="elm-select">';
 					foreach ($config['options'] as $key => $val) {
 						$option == $key ? $sel = ' selected="selected"' : $sel = '';
 						$output .= '<option value="'.$key.'"'.$sel.'>'.$val.'</option>';

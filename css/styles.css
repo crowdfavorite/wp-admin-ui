@@ -4,6 +4,11 @@
 	position: relative;
 	width: 100%;
 }
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+	padding-bottom: 5px;	
+}
 .wphc-support-btn {
 	display: block;
 	background: url(../img/support-btn.gif) 0 0 no-repeat;
