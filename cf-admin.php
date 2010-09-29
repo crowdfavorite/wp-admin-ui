@@ -28,7 +28,7 @@ if ( ! class_exists('CF_Admin')) {
 			}
 		}
 		
-		function cf_options_header($title = 'Options', $plugin_name, $plugin_version) {
+		function cf_admin_header($title = 'Options', $plugin_name, $plugin_version) {
 			echo '<h2>'.$title.' '.self::cf_get_support_button($plugin_name, $plugin_version).'</h2>';
 		} 
 		
@@ -61,7 +61,6 @@ if ( ! class_exists('CF_Admin')) {
 		function cf_support_button($product) {
 			echo cf_get_support_button($product);
 		}
-		
 		
 		function cf_display_settings($settings) {
 			include 'includes/cf-display-settings.php';
