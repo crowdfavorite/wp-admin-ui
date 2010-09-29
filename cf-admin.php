@@ -181,6 +181,11 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		//Multisite
+		function cf_is_multisite_and_network_activation() {
+			return (function_exists('is_multisite') && is_multisite() &&
+				isset($_GET['networkwide']) && ($_GET['networkwide'] == 1));
+		}
+		
 		function cf_get_site_blogs() {
 			global $wpdb;
 			return $wpdb->get_col("
