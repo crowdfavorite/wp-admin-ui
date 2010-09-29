@@ -28,6 +28,10 @@
 form .elm-block:hover {
 	background-color: #f3f3f3;
 }
+form .elm-block.no-hover,
+form .no-hover .elm-block:hover {
+	background: none;
+}
 .elm-block.active {
 	background-color: #eee;
 }
@@ -46,6 +50,11 @@ form .elm-block:hover {
 .elm-help {
 	color: #888;
 }
+.elm-help.elm-align-bottom {
+	display: block;
+	padding-left: 20%;
+}
+
 span.elm-checkbox,
 span.elm-flag,
 span.elm-date,
@@ -96,7 +105,7 @@ label.lbl-radio {
 .lbl-pos-left .view label.lbl-checkbox,
 .lbl-pos-left .view label.lbl-flag,
 .lbl-pos-left .view label.lbl-radio {
-	width: 30%; /* needs to match .lbl-left .elm-* margin-left */
+	width: 20%; /* needs to match .lbl-left .elm-* margin-left */
 	float: left;
 }
 .lbl-pos-left label, 
@@ -116,7 +125,7 @@ label.lbl-radio {
 .lbl-pos-left .elm-checkbox,
 .lbl-pos-left .elm-flag,
 .lbl-pos-left .elm-radio {
-	margin-left: 30%; /* needs to match .lbl-left .lbl-* width */
+	margin-left: 20%; /* needs to match .lbl-left .lbl-* width */
 }
 /* remainging labels left for view only */
 .lbl-pos-left .view label.lbl-checkbox,

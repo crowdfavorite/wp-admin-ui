@@ -6,8 +6,6 @@ jQuery(function($) {
 		$(this).parents('.elm-block').addClass('active');
 	});
 	
-
-	
 	// Set's cookies and decides to show support banner or button
 	// requires jquery.cookie.js
     var wphc_cookie_name = 'wphc'; // set cookie variable

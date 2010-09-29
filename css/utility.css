@@ -67,9 +67,13 @@
 
 /* Links
 -------------------------------------------------- */
+.lnk-remove,
+.lnk-delete {
+	color: #bc0b0b;
+}
 .lnk-remove:hover,
 .lnk-delete:hover {
-	color: #c00;
+	color: #ff0000;
 }
 
 /* Margins/Padding
