@@ -204,7 +204,7 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		function cf_new_blog($file, $blog_id) {
-			if (is_plugin_active_for_network(plugin_basename($file))) {
+			if (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network(plugin_basename($file))) {
 				switch_to_blog($blog_id);
 				cfmobi_activate_single();
 				restore_current_blog();
