@@ -189,8 +189,6 @@ if ( ! class_exists('CF_Admin')) {
 						$value = stripslashes($_POST[$key]);
 						break;
 				}
-				error_log('key ' . $key);
-				error_log('value ' . $value);
 				update_option($key, $value);
 			}
 		}
