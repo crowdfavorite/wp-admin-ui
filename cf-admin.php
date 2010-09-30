@@ -105,6 +105,9 @@ if ( ! class_exists('CF_Admin')) {
 			empty($config['help_class']) ? $help_class = '' :  $help_class = ' '.$config['help_class'];
 			empty($config['div_class']) ? $div_class = '' : $div_class = ' '.$config['div_class'];
 			
+			if ($config['type'] == 'radio') $div_class .= ' has-radio';
+			if ($config['type'] == 'checkbox') $div_class .= ' has-checkbox';
+			
 			$output = '<div class="elm-block'. $div_class.'">';
 			switch ($config['type']) {
 				case 'select':
@@ -125,7 +128,7 @@ if ( ! class_exists('CF_Admin')) {
 					$output .='<span class="elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 				case 'radio':
-					$output .= '<p class="lbl-radio-group">';
+					$output .= '<p class="lbl-radio-group">'.$config['label'].'</p>';
 					$output .= '<ul>';
 					foreach ($config['options'] as $opt_key => $opt_val) {
 						$option == $opt_key ? $checked = ' checked"' : $checked = '';
@@ -134,7 +137,7 @@ if ( ! class_exists('CF_Admin')) {
 						$output .= '<label class="lbl-radio">'.$opt_val.'</label>';
 						$output .= '</li>';
 					}
-					$output .= '</ul></p>';
+					$output .= '</ul>';
 					break;
 				case 'checkbox':
 					$output .= '<label class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
