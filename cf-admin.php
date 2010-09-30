@@ -70,6 +70,7 @@ if ( ! class_exists('CF_Admin')) {
 			echo '<div id="cf">'; //closed in cf_end_form_submit
 			include 'includes/cf-start-form.php';
 		}
+		
 		function cf_end_form_submit($plugin_slug, $text_domain) {
 			include 'includes/cf-end-form-submit.php';
 			echo '</div>'; // #cf 
@@ -197,7 +198,7 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		function cf_activate_for_network($single_activation) {
-			$blogs = cf_get_site_blogs();
+			$blogs = self::cf_get_site_blogs();
 			foreach ($blogs as $blog_id) {
 				switch_to_blog($blog_id);
 				if (function_exists($single_activation)) {
@@ -208,10 +209,12 @@ if ( ! class_exists('CF_Admin')) {
 			return;
 		}
 		
-		function cf_new_blog($file, $blog_id) {
+		function cf_new_blog($file, $blog_id, $single_activation) {
 			if (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network(plugin_basename($file))) {
 				switch_to_blog($blog_id);
-				cfmobi_activate_single();
+				if (function_exists($single_activation)) {
+					call_user_func($single_activation);
+				}
 				restore_current_blog();
 			}		
 		}
