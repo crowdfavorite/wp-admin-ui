@@ -1,5 +1,5 @@
 <?php
-print ('
+echo ('
 	<div class="cf-callout">
 		<div id="cf-callout-support" class="cf-box">
 			<h3 class="cf-box-title">Support Provided By</h3>
@@ -9,5 +9,5 @@ print ('
 			</div><!-- .cf-box-content -->
 		</div><!-- #cf-callout-support -->						
 	</div>
-');
+	');
 ?>
