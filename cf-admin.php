@@ -125,12 +125,16 @@ if ( ! class_exists('CF_Admin')) {
 					$output .='<span class="elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 				case 'radio':
-					$output .= '<label class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
+					$output .= '<p class="lbl-radio-group">';
+					$output .= '<ul>';
 					foreach ($config['options'] as $opt_key => $opt_val) {
-						$option == $opt_key ? $checked = ' checked"' : $checked = '';						
+						$option == $opt_key ? $checked = ' checked"' : $checked = '';
+						$output .= '<li>';
 						$output .= '<input type="radio" class="elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
 						$output .= '<label class="lbl-radio">'.$opt_val.'</label>';
+						$output .= '</li>';
 					}
+					$output .= '</ul></p>';
 					break;
 				case 'checkbox':
 					$output .= '<label class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
