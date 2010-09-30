@@ -4,27 +4,27 @@ if ( ! class_exists('CF_Admin')) {
 				
 		function cf_path_to_adminui() {
 			if (defined('CF_TEST_DIR')) {
-				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'admin-ui/';
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'cf-admin/';
 			}
 			$plugin_dir = basename( dirname( dirname(__FILE__)));
 			if ($plugin_dir == basename(WP_PLUGIN_DIR)) {
 				return trailingslashit(WP_PLUGIN_DIR) . 'admin-ui/';
 			}
 			else {
-				return 	trailingslashit(WP_PLUGIN_DIR) . trailingslashit($plugin_dir) . 'admin-ui/';
+				return 	trailingslashit(WP_PLUGIN_DIR) . trailingslashit($plugin_dir) . 'cf-admin/';
 			}
 		}
 		
 		function cf_url_to_adminui() {
 			if (defined('CF_TEST_DIR')) {
-				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'admin-ui/';
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'cf-admin/';
 			}
 			$plugin_dir_name = basename( dirname( dirname(__FILE__)));
 			if ($plugin_dir_name == basename(WP_PLUGIN_DIR)) {
 				return trailingslashit(WP_PLUGIN_URL) . 'admin-ui/';
 			}
 			else {
-				return trailingslashit(WP_PLUGIN_URL) . trailingslashit($plugin_dir_name) . 'admin-ui/';
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit($plugin_dir_name) . 'cf-admin/';
 			}
 		}
 		
@@ -125,7 +125,12 @@ if ( ! class_exists('CF_Admin')) {
 					$output .='<span class="elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 				case 'radio':
-					
+					$output .= '<label class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
+					foreach ($config['options'] as $opt_key => $opt_val) {
+						$option == $opt_key ? $checked = ' checked"' : $checked = '';						
+						$output .= '<input type="radio" class="elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
+						$output .= '<label class="lbl-radio">'.$opt_val.'</label>';
+					}
 					break;
 				case 'checkbox':
 					$output .= '<label class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
@@ -138,7 +143,7 @@ if ( ! class_exists('CF_Admin')) {
 							$checked = '';
 						}
 						$label = $label = '<label for="'.$checkbox.'" class="lbl-checkbox">'.$checkbox.'</label>';
-						$output .= '<input type="checkbox" class="elm-checkbox" value="'.$checkbox.'" '.$checked.'>'.$label;
+						$output .= '<input type="checkbox" class="elm-checkbox" value="'.$checkbox.'" '.$checked.' />'.$label;
 					}
 					
 					$output .= '<span class="elm-help '.$help_class.'">' . $help . '</span>';	
@@ -177,6 +182,8 @@ if ( ! class_exists('CF_Admin')) {
 						$value = stripslashes($_POST[$key]);
 						break;
 				}
+				error_log('key ' . $key);
+				error_log('value ' . $value);
 				update_option($key, $value);
 			}
 		}
