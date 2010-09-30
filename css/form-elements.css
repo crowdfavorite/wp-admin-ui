@@ -196,26 +196,26 @@ label.lbl-radio {
 .lbl-radio-group {
 	font-size: 1em;
 }
+.lbl-pos-left .lbl-checkbox-group,
+.lbl-pos-left .lbl-radio-group {
+	width: 20%; /* needs to match .lbl-left .elm-* margin-left */
+	float: left;
+}
+p.lbl-checkbox-group,
+p.lbl-radio-group {
+	margin: 1px 0;
+}
 .has-checkbox ul,
 .has-radio ul {
 	list-style-type: none;
 	margin-left: 0;
 }
-.has-checkbox li,
-.has-radio li {
-	overflow: hidden;
+.lbl-pos-left .has-radio ul {
+	margin-left: 20%;
+	margin-top: 2px;
 }
-
-li .elm-checkbox,
-li .elm-radio {
-	float: left;
-	margin: 1px;
-	vertical-align: middle;
-}
-li .lbl-checkbox,
-li .lbl-radio {
-	display: block;
-	padding-left: 7px;
+.lbl-pos-left .has-radio ul .elm-radio {
+	margin-left: 0;
 }
 
 .lbl-hide label,
