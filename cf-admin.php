@@ -159,7 +159,7 @@ if ( ! class_exists('CF_Admin')) {
 				default:
 					$label = '<label for="'.$key.'" class="cf-lbl-text'.$label_class.'">'.$config['label'].'</label>';
 					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="cf-elm-text'.$input_class.'" />';
-					$output .= '<div class="cf-elm-help'.$help_class.'">' . $help . '</div>';
+					$output .= '<span class="cf-elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 			}
 			return $output.'</div>';
