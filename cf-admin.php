@@ -132,8 +132,8 @@ if ( ! class_exists('CF_Admin')) {
 					foreach ($config['options'] as $opt_key => $opt_val) {
 						$option == $opt_key ? $checked = ' checked"' : $checked = '';
 						$output .= '<li>';
-						$output .= '<input id="radio-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
-						$output .= '<label for="radio-'.$opt_val.'" class="cf-lbl-radio">'.$opt_val.'</label>';
+						$output .= '<input id="'.$key.'-'.$opt_value.'" type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
+						$output .= '<label for="'.$key.'-'.$opt_value.'" class="cf-lbl-radio">'.$opt_val.'</label>';
 						$output .= '</li>';
 					}
 					$output .= '</ul>';
