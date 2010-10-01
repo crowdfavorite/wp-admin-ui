@@ -78,7 +78,7 @@ if ( ! class_exists('CF_Admin')) {
 		
 		function cf_settings_form($settings, $plugin_slug, $text_domain) {
 			self::cf_start_form($plugin_slug);
-			echo '<fieldset class="lbl-pos-left">';
+			echo '<fieldset class="cf-lbl-pos-left">';
 			self::cf_display_settings($settings);
 			echo '</fieldset>';
 			self::cf_end_form_submit($plugin_slug, $text_domain);
