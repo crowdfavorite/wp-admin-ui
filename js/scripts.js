@@ -2,8 +2,8 @@ jQuery(function($) {
 	
 	// show current/active form element
 	$('#cf form :input').focus(function() {
-		$('.elm-block.active').removeClass('active');
-		$(this).parents('.elm-block').addClass('active');
+		$('.cf-elm-block.active').removeClass('active');
+		$(this).parents('.cf-elm-block').addClass('active');
 	});
 	
 	// Set's cookies and decides to show support banner or button

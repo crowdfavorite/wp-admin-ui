@@ -98,49 +98,48 @@ if ( ! class_exists('CF_Admin')) {
 		
 		function cf_settings_field($key, $config) {
 			$option = get_option($key);
-			$label = '<label for="'.$key.'">'.$config['label'].'</label>';
 			$help = $config['help'];
 			empty($config['label_class']) ? $label_class = '' :  $label_class = ' '.$config['label_class'];
 			empty($config['input_class']) ? $input_class = '' : $input_class = ' '.$config['input_class'];
 			empty($config['help_class']) ? $help_class = '' :  $help_class = ' '.$config['help_class'];
 			empty($config['div_class']) ? $div_class = '' : $div_class = ' '.$config['div_class'];
 			
-			if ($config['type'] == 'radio') $div_class .= ' has-radio';
-			if ($config['type'] == 'checkbox') $div_class .= ' has-checkbox';
+			if ($config['type'] == 'radio') $div_class .= ' cf-has-radio';
+			if ($config['type'] == 'checkbox') $div_class .= ' cf-has-checkbox';
 			
-			$output = '<div class="elm-block'. $div_class.'">';
+			$output = '<div class="cf-elm-block'. $div_class.'">';
 			switch ($config['type']) {
 				case 'select':
-					$label = '<label for="'.$key.'" class="lbl-select">'.$config['label'].'</label>';
-					$output .= $label.'<select name="'.$key.'" id="'.$key.'" class="elm-select">';
+					$label = '<label for="'.$key.'" class="cf-lbl-select">'.$config['label'].'</label>';
+					$output .= $label.'<select name="'.$key.'" id="'.$key.'" class="cf-elm-select">';
 					foreach ($config['options'] as $key => $val) {
 						$option == $key ? $sel = ' selected="selected"' : $sel = '';
 						$output .= '<option value="'.$key.'"'.$sel.'>'.$val.'</option>';
 					}
-					$output .= '</select><span class="elm-help">' . $help . '</span>';
+					$output .= '</select><span class="cf-elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 				case 'textarea':
-					$label = '<label for="'.$key.'" class="lbl-textarea'.$label_class.'">'.$config['label'].'</label>';
+					$label = '<label for="'.$key.'" class="cf-lbl-textarea'.$label_class.'">'.$config['label'].'</label>';
 					if (is_array($option)) {
 						$option = implode("\n", $option);
 					}
-					$output .= $label.'<textarea name="'.$key.'" id="'.$key.'" class="elm-textarea'.$input_class.'" rows="8" cols="40">'.htmlspecialchars($option).'</textarea>';
-					$output .='<span class="elm-help'.$help_class.'">' . $help . '</span>';
+					$output .= $label.'<textarea name="'.$key.'" id="'.$key.'" class="cf-elm-textarea'.$input_class.'" rows="8" cols="40">'.htmlspecialchars($option).'</textarea>';
+					$output .='<span class="cf-elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 				case 'radio':
-					$output .= '<p class="lbl-radio-group">'.$config['label'].'</p>';
+					$output .= '<p class="cf-lbl-radio-group">'.$config['label'].'</p>';
 					$output .= '<ul>';
 					foreach ($config['options'] as $opt_key => $opt_val) {
 						$option == $opt_key ? $checked = ' checked"' : $checked = '';
 						$output .= '<li>';
-						$output .= '<input type="radio" class="elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
-						$output .= '<label class="lbl-radio">'.$opt_val.'</label>';
+						$output .= '<input type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
+						$output .= '<label class="cf-lbl-radio">'.$opt_val.'</label>';
 						$output .= '</li>';
 					}
 					$output .= '</ul>';
 					break;
 				case 'checkbox':
-					$output .= '<label class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
+					$output .= '<label class="cf-lbl-text'.$label_class.'">'.$config['label'].'</label>';
 					$options = explode(',',$option);
 					foreach ($config['options'] as $checkbox) {
 						if (in_array($checkbox, $options)) {
@@ -149,18 +148,18 @@ if ( ! class_exists('CF_Admin')) {
 						else {
 							$checked = '';
 						}
-						$label = $label = '<label for="'.$checkbox.'" class="lbl-checkbox">'.$checkbox.'</label>';
-						$output .= '<input type="checkbox" class="elm-checkbox" value="'.$checkbox.'" '.$checked.' />'.$label;
+						$label = '<label for="'.$checkbox.'" class="cf-lbl-checkbox">'.$checkbox.'</label>';
+						$output .= '<input type="checkbox" class="cf-elm-checkbox" value="'.$checkbox.'" '.$checked.' />'.$label;
 					}
 					
-					$output .= '<span class="elm-help '.$help_class.'">' . $help . '</span>';	
+					$output .= '<span class="cf-elm-help '.$help_class.'">' . $help . '</span>';	
 					break;
 				case 'string':
 				case 'int':
 				default:
-					$label = '<label for="'.$key.'" class="lbl-text'.$label_class.'">'.$config['label'].'</label>';
-					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="elm-text'.$input_class.'" />';
-					$output .= '<div class="elm-help'.$help_class.'">' . $help . '</div>';
+					$label = '<label for="'.$key.'" class="cf-lbl-text'.$label_class.'">'.$config['label'].'</label>';
+					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="cf-elm-text'.$input_class.'" />';
+					$output .= '<div class="cf-elm-help'.$help_class.'">' . $help . '</div>';
 					break;
 			}
 			return $output.'</div>';

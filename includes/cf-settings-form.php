@@ -1,8 +1,8 @@
 <?php
 	echo ('
-		<form id="' . $plugin_slug . '_settings_form" name="' . $plugin_slug . '_settings_form" action="'.get_bloginfo('wpurl').'/wp-admin/options-general.php" method="post" class="elm-width-300">
+		<form id="' . $plugin_slug . '_settings_form" name="' . $plugin_slug . '_settings_form" action="'.get_bloginfo('wpurl').'/wp-admin/options-general.php" method="post" class="cf-elm-width-300">
 			<input type="hidden" name="cf_action" value="'.$plugin_slug . '_update_settings" />
-			<fieldset class="lbl-pos-left">
+			<fieldset class="cf-lbl-pos-left">
 		');
 	foreach ($settings as $key => $config) {
 		echo self::cf_settings_field($key, $config);

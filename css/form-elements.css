@@ -17,7 +17,7 @@
 }
 
 /* wrapper for labels and form elements */
-.elm-block {
+.cf-elm-block {
 	clear: both;
 	margin: 3px 0;
 	padding: 3px 5px;
@@ -25,146 +25,146 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
-form .elm-block:hover {
+form .cf-elm-block:hover {
 	background-color: #f3f3f3;
 }
-form .elm-block.no-hover,
-form .no-hover .elm-block:hover {
+form .cf-elm-block.no-hover,
+form .no-hover .cf-elm-block:hover {
 	background: none;
 }
-.elm-block.active {
+.cf-elm-block.active {
 	background-color: #eee;
 }
 
-.elm-date,
-.elm-readonly,
-.elm-hidden,
-.elm-text,
-.elm-password,
-.elm-select,
-.elm-textarea {
+.cf-elm-date,
+.cf-elm-readonly,
+.cf-elm-hidden,
+.cf-elm-text,
+.cf-elm-password,
+.cf-elm-select,
+.cf-elm-textarea {
 	font-size: 12px;
 	padding: 3px;
 }
 
-.elm-help {
+.cf-elm-help {
 	color: #888;
 }
-.elm-help.elm-align-bottom {
+.cf-elm-help.cf-elm-align-bottom {
 	display: block;
 	padding-left: 20%;
 }
 
-span.elm-checkbox,
-span.elm-flag,
-span.elm-date,
-span.elm-readonly,
-span.elm-hidden,
-span.elm-text,
-span.elm-password,
-span.elm-select,
-div.elm-textarea {
+span.cf-elm-checkbox,
+span.cf-elm-flag,
+span.cf-elm-date,
+span.cf-elm-readonly,
+span.cf-elm-hidden,
+span.cf-elm-text,
+span.cf-elm-password,
+span.cf-elm-select,
+div.cf-elm-textarea {
 	padding: 3px 0;
 }
 
-span.elm-checkbox,
-span.elm-flag,
-label.lbl-checkbox,
-label.lbl-flag,
-label.lbl-radio {
+span.cf-elm-checkbox,
+span.cf-elm-flag,
+label.cf-lbl-checkbox,
+label.cf-lbl-flag,
+label.cf-lbl-radio {
 	color: #333;
 	font-size: 12px;
 }
-.view label.lbl-checkbox,
-.view label.lbl-flag,
-.view label.lbl-radio {
+.view label.cf-lbl-checkbox,
+.view label.cf-lbl-flag,
+.view label.cf-lbl-radio {
 	color: #555;
 	font-size: 11px;
 }
 
-.lbl-pos-top .lbl-date,
-.lbl-pos-top .lbl-readonly,
-.lbl-pos-top .lbl-hidden,
-.lbl-pos-top .lbl-text,
-.lbl-pos-top .lbl-textarea,
-.lbl-pos-top .lbl-select,
-.lbl-pos-top .lbl-password {
+.cf-lbl-pos-top .cf-lbl-date,
+.cf-lbl-pos-top .cf-lbl-readonly,
+.cf-lbl-pos-top .cf-lbl-hidden,
+.cf-lbl-pos-top .cf-lbl-text,
+.cf-lbl-pos-top .cf-lbl-textarea,
+.cf-lbl-pos-top .cf-lbl-select,
+.cf-lbl-pos-top .cf-lbl-password {
 	display: block;
 }
-.lbl-pos-top label.lbl-checkbox,
-.lbl-pos-top label.lbl-flag,
-.lbl-pos-top label.lbl-radio {
+.cf-lbl-pos-top label.cf-lbl-checkbox,
+.cf-lbl-pos-top label.cf-lbl-flag,
+.cf-lbl-pos-top label.cf-lbl-radio {
 	cursor: pointer;
 	display: inline;
 }
 
-.lbl-pos-left .elm-block {
+.cf-lbl-pos-left .cf-elm-block {
 	clear: both;
 }
-.lbl-pos-left label,
-.lbl-pos-left .view label.lbl-checkbox,
-.lbl-pos-left .view label.lbl-flag,
-.lbl-pos-left .view label.lbl-radio {
-	width: 20%; /* needs to match .lbl-left .elm-* margin-left */
+.cf-lbl-pos-left label,
+.cf-lbl-pos-left .view label.cf-lbl-checkbox,
+.cf-lbl-pos-left .view label.cf-lbl-flag,
+.cf-lbl-pos-left .view label.cf-lbl-radio {
+	width: 20%; /* needs to match .cf-lbl-left .cf-elm-* margin-left */
 	float: left;
 }
-.lbl-pos-left label, 
-.lbl-pos-left span.view {
+.cf-lbl-pos-left label, 
+.cf-lbl-pos-left span.view {
 	padding-top: 3px;
 }
-.lbl-pos-left span.view {
+.cf-lbl-pos-left span.view {
 	display: inline-block;
 }
-.lbl-pos-left label.lbl-checkbox,
-.lbl-pos-left label.lbl-flag,
-.lbl-pos-left label.lbl-radio {
+.cf-lbl-pos-left label.cf-lbl-checkbox,
+.cf-lbl-pos-left label.cf-lbl-flag,
+.cf-lbl-pos-left label.cf-lbl-radio {
 	width: auto;
 	padding-top: 0;
 	float: none;
 }
-.lbl-pos-left .elm-checkbox,
-.lbl-pos-left .elm-flag,
-.lbl-pos-left .elm-radio {
-	margin-left: 20%; /* needs to match .lbl-left .lbl-* width */
+.cf-lbl-pos-left .cf-elm-checkbox,
+.cf-lbl-pos-left .cf-elm-flag,
+.cf-lbl-pos-left .cf-elm-radio {
+	margin-left: 20%; /* needs to match .cf-lbl-left .cf-lbl-* width */
 }
 /* remainging labels left for view only */
-.lbl-pos-left .view label.lbl-checkbox,
-.lbl-pos-left .view label.lbl-flag,
-.lbl-pos-left .view label.lbl-radio {
+.cf-lbl-pos-left .view label.cf-lbl-checkbox,
+.cf-lbl-pos-left .view label.cf-lbl-flag,
+.cf-lbl-pos-left .view label.cf-lbl-radio {
 	color: #555;
 	font-size: 11px;
 	padding-top: 3px;
 }
 
 /* Set form element width's */
-.elm-width-300 .elm-text,
-.elm-width-300 .elm-password,
-.elm-width-300 .elm-textarea {
+.cf-elm-width-300 .cf-elm-text,
+.cf-elm-width-300 .cf-elm-password,
+.cf-elm-width-300 .cf-elm-textarea {
 	width: 300px;
 }
-.elm-width-500 .elm-text,
-.elm-width-500 .elm-password,
-.elm-width-500 .elm-textarea {
+.cf-elm-width-500 .cf-elm-text,
+.cf-elm-width-500 .cf-elm-password,
+.cf-elm-width-500 .cf-elm-textarea {
 	width: 500px;
 }
-.elm-width-200 .elm-text,
-.elm-width-200 .elm-password,
-.elm-width-200 .elm-textarea {
+.cf-elm-width-200 .cf-elm-text,
+.cf-elm-width-200 .cf-elm-password,
+.cf-elm-width-200 .cf-elm-textarea {
 	width: 200px;
 }
-.elm-width-50 .elm-text,
-.elm-width-50 .elm-password,
-.elm-width-50 .elm-textarea {
+.cf-elm-width-50 .cf-elm-text,
+.cf-elm-width-50 .cf-elm-password,
+.cf-elm-width-50 .cf-elm-textarea {
 	width: 40px;
 }
-.elm-width-100 .elm-text,
-.elm-width-100 .elm-password,
-.elm-width-100 .elm-textarea {
+.cf-elm-width-100 .cf-elm-text,
+.cf-elm-width-100 .cf-elm-password,
+.cf-elm-width-100 .cf-elm-textarea {
 	width: 100px;
 }
-.elm-width-full .elm-text,
-.elm-width-full .elm-password,
-.elm-width-full .elm-textarea {
+.cf-elm-width-full .cf-elm-text,
+.cf-elm-width-full .cf-elm-password,
+.cf-elm-width-full .cf-elm-textarea {
 	/**
 	 * Box model CSS3 change
 	 * @see http://www.quirksmode.org/css/box.html
@@ -175,54 +175,55 @@ label.lbl-radio {
 	box-sizing: border-box; /* Standard. Opera7+, IE8+ */
 	width: 99%;
 }
-.lbl-pos-left .elm-width-full .elm-text,
-.lbl-pos-left .elm-width-full .elm-password,
-.lbl-pos-left .elm-width-full .elm-textarea {
+.cf-lbl-pos-left .cf-elm-width-full .cf-elm-text,
+.cf-lbl-pos-left .cf-elm-width-full .cf-elm-password,
+.cf-lbl-pos-left .cf-elm-width-full .cf-elm-textarea {
 	width: 69%;
 }
 /* Set form element heights (textarea) */
-.elm-height-60 .elm-textarea {
+.cf-elm-height-60 .cf-elm-textarea {
 	height: 60px;
 }
-.elm-height-100 .elm-textarea {
+.cf-elm-height-100 .cf-elm-textarea {
 	height: 100px;
 }
-.elm-height-500 .elm-textarea {
+.cf-elm-height-500 .cf-elm-textarea {
 	height: 500px;
 }
 
 /* checkbox and radio lists */
-.lbl-checkbox-group,
-.lbl-radio-group {
+.cf-lbl-checkbox-group,
+.cf-lbl-radio-group {
 	font-size: 1em;
 }
-.lbl-pos-left .lbl-checkbox-group,
-.lbl-pos-left .lbl-radio-group {
-	width: 20%; /* needs to match .lbl-left .elm-* margin-left */
+.cf-lbl-pos-left .cf-lbl-checkbox-group,
+.cf-lbl-pos-left .cf-lbl-radio-group {
+	width: 20%; /* needs to match .cf-lbl-left .cf-elm-* margin-left */
 	float: left;
 }
-p.lbl-checkbox-group,
-p.lbl-radio-group {
+p.cf-lbl-checkbox-group,
+p.cf-lbl-radio-group {
 	margin: 1px 0;
 }
-.has-checkbox ul,
-.has-radio ul {
+.cf-has-checkbox ul,
+.cf-has-radio ul {
 	list-style-type: none;
 	margin-left: 0;
 }
-.lbl-pos-left .has-radio ul {
+.cf-lbl-pos-left .cf-has-radio ul,
+.cf-lbl-pos-left .cf-has-checkbox ul {
 	margin-left: 20%;
 	margin-top: 2px;
 }
-.lbl-pos-left .has-radio ul .elm-radio {
+.cf-lbl-pos-left .cf-has-radio ul .cf-elm-radio,
+.cf-lbl-pos-left .cf-has-checkbox ul .cf-elm-checkbox {
 	margin-left: 0;
 }
 
-.lbl-hide label,
-label.lbl-hide {
+.cf-lbl-hide label,
+label.cf-lbl-hide {
 	display: none;
 }
-
 
 /* notifications */
 .cf-error { 
