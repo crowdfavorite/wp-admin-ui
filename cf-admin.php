@@ -132,8 +132,8 @@ if ( ! class_exists('CF_Admin')) {
 					foreach ($config['options'] as $opt_key => $opt_val) {
 						$option == $opt_key ? $checked = ' checked"' : $checked = '';
 						$output .= '<li>';
-						$output .= '<input type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
-						$output .= '<label class="cf-lbl-radio">'.$opt_val.'</label>';
+						$output .= '<input id="radio-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
+						$output .= '<label for="radio-'.$opt_val.'" class="cf-lbl-radio">'.$opt_val.'</label>';
 						$output .= '</li>';
 					}
 					$output .= '</ul>';
@@ -149,7 +149,7 @@ if ( ! class_exists('CF_Admin')) {
 							$checked = '';
 						}
 						$label = '<label for="'.$checkbox.'" class="cf-lbl-checkbox">'.$checkbox.'</label>';
-						$output .= '<input type="checkbox" class="cf-elm-checkbox" value="'.$checkbox.'" '.$checked.' />'.$label;
+						$output .= '<input id="'.$checkbox.'" type="checkbox" class="cf-elm-checkbox" value="'.$checkbox.'" '.$checked.' />'.$label;
 					}
 					
 					$output .= '<span class="cf-elm-help '.$help_class.'">' . $help . '</span>';	
