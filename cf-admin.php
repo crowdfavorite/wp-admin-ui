@@ -37,7 +37,7 @@ if ( ! class_exists('CF_Admin')) {
 				echo '<div id="cf-header" class="cf-clearfix">
 						<ul id="cf-nav">';
 				foreach ($titles as $title) {
-					echo '<li id=tab-'.$title.'><a href="#" class="current">'.$title.'</a></li>'
+					echo '<li id=tab-'.$title.'><a href="#" class="current">'.$title.'</a></li>';
 				}
 				echo '</ul>
 					</div><!-- #cf-header -->';
