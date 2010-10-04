@@ -1,4 +1,7 @@
 jQuery(function($) {
+	if ($("#cf-tab-content-1").length > 0){
+		$('#cf-tab-content-1').show();
+	}
 	
 	// show current/active form element
 	$('#cf form :input').focus(function() {
@@ -27,5 +30,18 @@ jQuery(function($) {
 		$.cookie(wphc_cookie_name, 'dismissed', { expires: 30 }); // set cookie and expiration in days
 		return false;
 	});
+	
+	//Tabs
+	$('.cf-tab a').click(function() {
+		$('#cf-nav .current').removeClass('current');
+		$(this).addClass('current');
 		
+		var tab_div;
+		tab_div = $(this).parent().attr('id').replace('cf-tab-', '');
+		$('[id^=cf-tab-content-]').hide();
+		$('#cf-tab-content-'+tab_div).show();
+		
+	});
+	
+	
 });

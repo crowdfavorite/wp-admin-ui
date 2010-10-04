@@ -33,14 +33,22 @@ if ( ! class_exists('CF_Admin')) {
 		} 
 		
 		function cf_admin_tabs($titles) {
+			
 			if (count($titles)) {
 				echo '<div id="cf-header" class="cf-clearfix">
 						<ul id="cf-nav">';
+				
+				$counter = 1;
 				foreach ($titles as $title) {
-					echo '<li id=tab-'.$title.'><a href="#" class="current">'.$title.'</a></li>';
+					$class = '';
+					if ($counter == 1) {
+						$class = ' class="current"';
+					}
+					echo '<li id=cf-tab-'.$counter.' class="cf-tab"><a href="#"'.$class.'>'.$title.'</a></li>';
+					$counter += 1;
 				}
 				echo '</ul>
-					</div><!-- #cf-header -->';
+					</div><!-- #cf-header --><p></p>';
 			}
 		}
 		
@@ -100,6 +108,7 @@ if ( ! class_exists('CF_Admin')) {
 			$css_url = self::cf_url_to_adminui() . 'css/';
 			wp_enqueue_style('cf_styles', $css_url . 'styles.css');
 			wp_enqueue_style('cf_form_elements', $css_url . 'form-elements.css');
+			wp_enqueue_style('cf_utility', $css_url . 'utility.css');
 		}
 		
 		function cf_load_js() {
