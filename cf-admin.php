@@ -36,10 +36,6 @@ if ( ! class_exists('CF_Admin')) {
 			if (count($titles)) {
 				echo '<div id="cf-header" class="cf-clearfix">
 						<ul id="cf-nav">';
-						<li><a href="#" class="current">Tab Active</a></li>
-						<li><a href="#">Tab Two</a></li>
-						<li><a href="#">Tab Three</a></li>
-
 				foreach ($titles as $title) {
 					echo '<li id=tab-'.$title.'><a href="#" class="current">'.$title.'</a></li>'
 				}
