@@ -32,6 +32,22 @@ if ( ! class_exists('CF_Admin')) {
 			echo '<h2>'.$title.' '.self::cf_get_support_button($plugin_name, $plugin_version).'</h2>';
 		} 
 		
+		function cf_admin_tabs($titles) {
+			if (count($titles)) {
+				echo '<div id="cf-header" class="cf-clearfix">
+						<ul id="cf-nav">';
+						<li><a href="#" class="current">Tab Active</a></li>
+						<li><a href="#">Tab Two</a></li>
+						<li><a href="#">Tab Three</a></li>
+
+				foreach ($titles as $title) {
+					echo '<li id=tab-'.$title.'><a href="#" class="current">'.$title.'</a></li>'
+				}
+				echo '</ul>
+					</div><!-- #cf-header -->';
+			}
+		}
+		
 		function cf_plugin_action_links($links, $file, $plugin_php_file) {
 			$plugin_file = basename($plugin_php_file);
 			if (basename($file) == $plugin_file) {
