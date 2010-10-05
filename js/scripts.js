@@ -1,8 +1,27 @@
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return false;
+}
+
 jQuery(function($) {
-	if ($("#cf-tab-content-1").length > 0){
-		$('#cf-tab-content-1').show();
+	var tab_num = getQueryVariable('cf_tab');
+	if (!tab_num) {
+		tab_num = 1;
 	}
 	
+	if ($('#cf-tab-content-'+tab_num).length > 0){
+		$('#cf-tab-'+tab_num+' a').addClass('current');
+		$('#cf-tab-content-'+tab_num).show();
+	}
+	
+	getQueryVariable('page');
 	// show current/active form element
 	$('#cf form :input').focus(function() {
 		$('.cf-elm-block.active').removeClass('active');

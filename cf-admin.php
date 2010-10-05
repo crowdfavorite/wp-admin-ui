@@ -29,6 +29,11 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		function cf_admin_header($title = 'Options', $plugin_name, $plugin_version) {
+			if (isset($_GET['updated']) && $_GET['updated']) {
+				echo '<div id="message" class="updated">
+						<p>Options Updated.</p>
+					</div>';
+			}
 			echo '<h2>'.$title.' '.self::cf_get_support_button($plugin_name, $plugin_version).'</h2>';
 		} 
 		
@@ -40,11 +45,7 @@ if ( ! class_exists('CF_Admin')) {
 				
 				$counter = 1;
 				foreach ($titles as $title) {
-					$class = '';
-					if ($counter == 1) {
-						$class = ' class="current"';
-					}
-					echo '<li id=cf-tab-'.$counter.' class="cf-tab"><a href="#"'.$class.'>'.$title.'</a></li>';
+					echo '<li id=cf-tab-'.$counter.' class="cf-tab"><a href="#">'.$title.'</a></li>';
 					$counter += 1;
 				}
 				echo '</ul>
