@@ -38,7 +38,6 @@ if ( ! class_exists('CF_Admin')) {
 		} 
 		
 		function cf_admin_tabs($titles) {
-			
 			if (count($titles)) {
 				echo '<div id="cf-header" class="cf-clearfix">
 						<ul id="cf-nav">';
@@ -155,7 +154,7 @@ if ( ! class_exists('CF_Admin')) {
 						$option == $opt_key ? $checked = ' checked"' : $checked = '';
 						$output .= '<li>';
 						$output .= '<input id="'.$key.'-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
-						$output .= '<label for="'.$key.'-'.$opt_val.'" class="cf-lbl-radio">'.$opt_val.'</label>';
+						$output .= '<label for="'.$key.'-'.$opt_val.'" class="cf-lbl-radio"> '.$opt_val.'</label>';
 						$output .= '</li>';
 					}
 					$output .= '</ul>';
