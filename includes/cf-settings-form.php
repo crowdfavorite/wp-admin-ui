@@ -1,3 +1,4 @@
+// delete me
 <?php
 	echo ('
 		<form id="' . $plugin_slug . '_settings_form" name="' . $plugin_slug . '_settings_form" action="'.get_bloginfo('wpurl').'/wp-admin/options-general.php" method="post" class="cf-elm-width-300">

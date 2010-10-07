@@ -1,23 +1,26 @@
 <?php
-if ( ! class_exists('CF_Admin')) {
+if (!class_exists('CF_Admin')) {
+
+// load plugin text domain (cf-wpplugin-admin-ui)
+
 	Class CF_Admin {
 				
 		function cf_path_to_adminui() {
-			if (defined('CF_TEST_DIR')) {
-				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'cf-admin/';
+			if (defined('CF_ADMIN_UI_DIR')) {
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_ADMIN_UI_DIR) . 'cf-admin/';
 			}
 			$plugin_dir = basename( dirname( dirname(__FILE__)));
 			if ($plugin_dir == basename(WP_PLUGIN_DIR)) {
 				return trailingslashit(WP_PLUGIN_DIR) . 'admin-ui/';
 			}
 			else {
-				return 	trailingslashit(WP_PLUGIN_DIR) . trailingslashit($plugin_dir) . 'cf-admin/';
+				return trailingslashit(WP_PLUGIN_DIR) . trailingslashit($plugin_dir) . 'cf-admin/';
 			}
 		}
 		
 		function cf_url_to_adminui() {
-			if (defined('CF_TEST_DIR')) {
-				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_TEST_DIR) . 'cf-admin/';
+			if (defined('CF_ADMIN_UI_DIR')) {
+				return trailingslashit(WP_PLUGIN_URL) . trailingslashit(CF_ADMIN_UI_DIR) . 'cf-admin/';
 			}
 			$plugin_dir_name = basename( dirname( dirname(__FILE__)));
 			if ($plugin_dir_name == basename(WP_PLUGIN_DIR)) {
@@ -30,32 +33,40 @@ if ( ! class_exists('CF_Admin')) {
 		
 		function cf_admin_header($title = 'Options', $plugin_name, $plugin_version) {
 			if (isset($_GET['updated']) && $_GET['updated']) {
+// TODO further abstract message support
+// i18n support for messages
 				echo '<div id="message" class="updated">
 						<p>Options Updated.</p>
 					</div>';
 			}
-			echo '<h2>'.$title.' '.self::cf_get_support_button($plugin_name, $plugin_version).'</h2>';
+			echo '<h2>'.esc_html($title).' '.self::cf_get_support_button($plugin_name, $plugin_version).'</h2>';
 		} 
 		
 		function cf_admin_tabs($titles) {
 			if (count($titles)) {
-				echo '<div id="cf-header" class="cf-clearfix">
-						<ul id="cf-nav">';
+				echo '
+<div id="cf-header" class="cf-clearfix">
+	<ul id="cf-nav">
+				';
 				
-				$counter = 1;
+				$i = 1;
 				foreach ($titles as $title) {
-					echo '<li id=cf-tab-'.$counter.' class="cf-tab"><a href="#">'.$title.'</a></li>';
-					$counter += 1;
+					echo '
+		<li id=cf-tab-'.$i.' class="cf-tab"><a href="#">'.esc_html($title).'</a></li>
+					';
+					$i++;
 				}
-				echo '</ul>
-					</div><!-- #cf-header --><p></p>';
+				echo '
+	</ul>
+</div><!-- #cf-header -->
+				';
 			}
 		}
 		
 		function cf_plugin_action_links($links, $file, $plugin_php_file) {
 			$plugin_file = basename($plugin_php_file);
 			if (basename($file) == $plugin_file) {
-				$settings_link = '<a href="options-general.php?page='.$plugin_file.'">'.__('Settings', 'cf-mobile').'</a>';
+				$settings_link = '<a href="'. admin_url('options-general.php?page='.$plugin_file).'">'.__('Settings', 'cf-wpplugin-admin-ui').'</a>';
 				array_unshift($links, $settings_link);
 			}
 			return $links;
@@ -71,11 +82,12 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		function cf_banner() {
+// TODO - note potential ID conflicts
 			include 'includes/cf-banner.php';
 		}
 		
 		function cf_get_support_button($product) {
-			return '<script type="text/javascript">var WPHC_AFF_ID = "14303"; var WPHC_POSITION = "c1"; var WPHC_PRODUCT = "'.$product.'"; var WPHC_WP_VERSION = "'.$wp_version.'";</script><script type="text/javascript" src="http://cloud.wphelpcenter.com/support-form/0001/deliver-a.js"></script>';
+			return '<script type="text/javascript">var WPHC_AFF_ID = "14303"; var WPHC_POSITION = "c1"; var WPHC_PRODUCT = "'.esc_js($product).'"; var WPHC_WP_VERSION = "'.esc_js($wp_version).'";</script><script type="text/javascript" src="http://cloud.wphelpcenter.com/support-form/0001/deliver-a.js"></script>';
 		}
 		
 		function cf_support_button($product) {
@@ -87,11 +99,14 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		function cf_start_form($plugin_slug) {
+// use include or echo, not both
+// potential ID conflict - make unique (use classes for styling rather than IDs if needed)
 			echo '<div id="cf">'; //closed in cf_end_form_submit
 			include 'includes/cf-start-form.php';
 		}
 		
 		function cf_end_form_submit($plugin_slug, $text_domain) {
+// use include or echo, not both
 			include 'includes/cf-end-form-submit.php';
 			echo '</div>'; // #cf 
 		}
@@ -125,15 +140,20 @@ if ( ! class_exists('CF_Admin')) {
 			empty($config['help_class']) ? $help_class = '' :  $help_class = ' '.$config['help_class'];
 			empty($config['div_class']) ? $div_class = '' : $div_class = ' '.$config['div_class'];
 			
-			if ($config['type'] == 'radio') $div_class .= ' cf-has-radio';
-			if ($config['type'] == 'checkbox') $div_class .= ' cf-has-checkbox';
+			if ($config['type'] == 'radio') {
+				$div_class .= ' cf-has-radio';
+			}
+			if ($config['type'] == 'checkbox') {
+				$div_class .= ' cf-has-checkbox';
+			}
 			
 			$output = '<div class="cf-elm-block'. $div_class.'">';
 			switch ($config['type']) {
-				case 'select':
+				case 'select': // handles single option selection only
 					$label = '<label for="'.$key.'" class="cf-lbl-select">'.$config['label'].'</label>';
 					$output .= $label.'<select name="'.$key.'" id="'.$key.'" class="cf-elm-select">';
 					foreach ($config['options'] as $key => $val) {
+// use selected()
 						$option == $key ? $sel = ' selected="selected"' : $sel = '';
 						$output .= '<option value="'.$key.'"'.$sel.'>'.$val.'</option>';
 					}
@@ -141,6 +161,7 @@ if ( ! class_exists('CF_Admin')) {
 					break;
 				case 'textarea':
 					$label = '<label for="'.$key.'" class="cf-lbl-textarea'.$label_class.'">'.$config['label'].'</label>';
+// move this data handling out of field output code
 					if (is_array($option)) {
 						$option = implode("\n", $option);
 					}
@@ -151,6 +172,7 @@ if ( ! class_exists('CF_Admin')) {
 					$output .= '<p class="cf-lbl-radio-group">'.$config['label'].'</p>';
 					$output .= '<ul>';
 					foreach ($config['options'] as $opt_key => $opt_val) {
+// use checked()
 						$option == $opt_key ? $checked = ' checked"' : $checked = '';
 						$output .= '<li>';
 						$output .= '<input id="'.$key.'-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.$checked.' />';
@@ -179,7 +201,7 @@ if ( ! class_exists('CF_Admin')) {
 				case 'int':
 				default:
 					$label = '<label for="'.$key.'" class="cf-lbl-text'.$label_class.'">'.$config['label'].'</label>';
-					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_html($option).'" class="cf-elm-text'.$input_class.'" />';
+					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_attr($option).'" class="cf-elm-text'.$input_class.'" />';
 					$output .= '<span class="cf-elm-help'.$help_class.'">' . $help . '</span>';
 					break;
 			}
@@ -193,7 +215,7 @@ if ( ! class_exists('CF_Admin')) {
 					case 'int':
 						$value = intval($_POST[$key]);
 						break;
-					case 'select':
+					case 'select': // handles single option selection only
 						$test = stripslashes($_POST[$key]);
 						if (isset($option['options'][$test])) {
 							$value = $test;
@@ -214,12 +236,14 @@ if ( ! class_exists('CF_Admin')) {
 		}
 		
 		//Multisite
+// 2 functions
 		function cf_is_multisite_and_network_activation() {
 			return (function_exists('is_multisite') && is_multisite() &&
 				isset($_GET['networkwide']) && ($_GET['networkwide'] == 1));
 		}
 		
 		function cf_get_site_blogs() {
+// double check that direct SQL is needed here
 			global $wpdb;
 			return $wpdb->get_col("
 				SELECT blog_id
@@ -241,6 +265,7 @@ if ( ! class_exists('CF_Admin')) {
 			return;
 		}
 		
+// rename method -  activate plugin on blog creation?
 		function cf_new_blog($file, $blog_id, $single_activation) {
 			if (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network(plugin_basename($file))) {
 				switch_to_blog($blog_id);

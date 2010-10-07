@@ -1,13 +1,14 @@
+// TODO - namespace
 function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-    var pair = vars[i].split("=");
-    if (pair[0] == variable) {
-      return pair[1];
-    }
-  }
-  return false;
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i=0;i<vars.length;i++) {
+		var pair = vars[i].split("=");
+		if (pair[0] == variable) {
+			return pair[1];
+		}
+	}
+	return false;
 }
 
 jQuery(function($) {
@@ -27,6 +28,8 @@ jQuery(function($) {
 		$('.cf-elm-block.active').removeClass('active');
 		$(this).parents('.cf-elm-block').addClass('active');
 	});
+
+// make cookie name variable so it is plugin specific
 	
 	// Set's cookies and decides to show support banner or button
 	// requires jquery.cookie.js
@@ -37,7 +40,8 @@ jQuery(function($) {
 	if (wphc_cookie_status == 'dismissed') {
 		// if it's been dismissed hide the widget banner
 		$('#wphc-widget').hide();
-	} else {
+	}
+	else {
 		// if it has NOT been dismissed hide the small support button
 		$('.wphc-support-btn').hide();
 	};
@@ -55,8 +59,8 @@ jQuery(function($) {
 		$('#cf-nav .current').removeClass('current');
 		$(this).addClass('current');
 		
-		var tab_div;
-		tab_div = $(this).parent().attr('id').replace('cf-tab-', '');
+		var tab_div = $(this).parent().attr('id').replace('cf-tab-', '');
+// use classes for selector
 		$('[id^=cf-tab-content-]').hide();
 		$('#cf-tab-content-'+tab_div).show();
 		
