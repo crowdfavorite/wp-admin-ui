@@ -26,14 +26,14 @@ if (!class_exists('CF_Admin')) {
 		function admin_header($title, $plugin_name, $plugin_version, $textdomain) {
 			if (isset($_GET['message'])) {
 				echo ('
-<div id="message" class="updated">
+<div class="cf-updated updated inline">
 	<p>'.esc_html($_GET['message']).'</p>
 </div>
 				');
 			} 
 			else if (isset($_GET['updated']) && $_GET['updated']) {
 				echo ('
-<div id="message" class="updated">
+<div class="cf-updated updated inline">
 	<p>'.__('Options Updated.', $textdomain).'</p>
 </div>
 				');				
@@ -43,14 +43,14 @@ if (!class_exists('CF_Admin')) {
 		
 		function admin_tabs($titles) {
 			if (count($titles)) {
-				echo '<ul id="cf-nav" class="cf-clearfixt">';
+				echo '<ul id="cf-nav" class="cf-clearfix">';
 				
 				$i = 1;
 				foreach ($titles as $title) {
-					echo '<li id=cf-tab-'.$i.' class="cf-tab"><a href="#">'.esc_html($title).'</a></li>';
+					echo '<li id="cf-tab-'.$i.'" class="cf-tab"><a href="#">'.esc_html($title).'</a></li>';
 					$i++;
 				}
-				echo '</ul>'
+				echo '</ul>';
 			}
 		}
 		
@@ -79,13 +79,7 @@ if (!class_exists('CF_Admin')) {
 		function support_button($plugin_name, $plugin_version) {
 			echo get_support_button($plugin_name, $plugin_version);
 		}
-		
-		function display_settings($settings) {
-			foreach ($settings as $key => $config) {
-				echo self::cf_settings_field($key, $config);
-			}
-		}
-		
+				
 		function start_form($plugin_slug) {
 			include 'includes/cf-start-form.php';
 		}
@@ -115,8 +109,20 @@ if (!class_exists('CF_Admin')) {
 			wp_enqueue_script('cf_js_script', $js_url.'scripts.js', array('jquery'));
 		}
 		
-		function settings_field($key, $config) {
-			$option = get_option($key);
+		function display_settings($settings) {
+			foreach ($settings as $key => $config) {
+				$value = get_option($key);
+				if (empty($value)) {
+					$value = $settings[$key]['default'];
+				}
+				if (is_array($value)) {
+					$value = implode("\n", $value);
+				}
+				echo self::settings_field($key, $config, $value);
+			}
+		}
+
+		function settings_field($key, $config, $value) {
 			$help = $config['help'];
 			
 			empty($config['label_class']) ? $label_class = '' :  $label_class = ' '.$config['label_class'];
@@ -133,24 +139,20 @@ if (!class_exists('CF_Admin')) {
 					$label = '<label for="'.$key.'" class="cf-lbl-select">'.$config['label'].'</label>';
 					$output .= $label.'<select name="'.$key.'" id="'.$key.'" class="cf-elm-select">';
 					foreach ($config['options'] as $sel_key => $sel_val) {
-						$output .= '<option value="'.$sel_key.'"'.selected($option, $sel_key, false).'>'.$sel_val.'</option>';
+						$output .= '<option value="'.$sel_key.'"'.selected($value, $sel_key, false).'>'.$sel_val.'</option>';
 					}
 					$output .= '</select>';
 					break;
 				case 'textarea':
 					$label = '<label for="'.$key.'" class="cf-lbl-textarea'.$label_class.'">'.$config['label'].'</label>';
-// move this data handling out of field output code
-					if (is_array($option)) {
-						$option = implode("\n", $option);
-					}
-					$output .= $label.'<textarea name="'.$key.'" id="'.$key.'" class="cf-elm-textarea'.$input_class.'" rows="8" cols="40">'.htmlspecialchars($option).'</textarea>';
+					$output .= $label.'<textarea name="'.$key.'" id="'.$key.'" class="cf-elm-textarea'.$input_class.'" rows="8" cols="40">'.htmlspecialchars($value).'</textarea>';
 					break;
 				case 'radio':
 					$output .= '<p class="cf-lbl-radio-group">'.$config['label'].'</p>';
 					$output .= '<ul>';
 					foreach ($config['options'] as $opt_key => $opt_val) {
 						$output .= '<li>';
-						$output .= '<input id="'.$opt_key.'-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$opt_key.'" value="'.$opt_key.'"'.checked( $option, $opt_key).' />';
+						$output .= '<input id="'.$opt_key.'-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$opt_key.'" value="'.$opt_key.'"'.checked( $value, $opt_key).' />';
 						$output .= '<label for="'.$opt_key.'-'.$opt_val.'" class="cf-lbl-radio"> '.$opt_val.'</label>';
 						$output .= '</li>';
 					}
@@ -158,10 +160,10 @@ if (!class_exists('CF_Admin')) {
 					break;
 				case 'checkbox':
 					$output .= '<label class="cf-lbl-text'.$label_class.'">'.$config['label'].'</label>';
-					$options = explode(',',$option);
+					$values = explode(',',$value);
 					foreach ($config['options'] as $check_key => $check_val) {
 						$checked = '';
-						if (in_array($check_key, $options)) {
+						if (in_array($check_key, $values)) {
 							$checked = ' checked';
 						}
 						$label = '<label for="'.$check_val.'" class="cf-lbl-checkbox">'.$check_val.'</label>';
@@ -172,13 +174,13 @@ if (!class_exists('CF_Admin')) {
 				case 'int':
 				default:
 					$label = '<label for="'.$key.'" class="cf-lbl-text'.$label_class.'">'.$config['label'].'</label>';
-					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_attr($option).'" class="cf-elm-text'.$input_class.'" />';
+					$output .= $label.'<input type="text" name="'.$key.'" id="'.$key.'" value="'.esc_attr($value).'" class="cf-elm-text'.$input_class.'" />';
 					break;
 			}
 			return $output.'<span class="cf-elm-help'.$help_class.'">'.$help.'</span></div>';
 		}
 		
-		function save_settings($settings) {
+		function update_settings($settings) {
 			foreach ($settings as $key => $option) {
 				$value = '';
 				switch ($option['type']) {
