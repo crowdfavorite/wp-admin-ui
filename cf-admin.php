@@ -11,12 +11,12 @@ if (!class_exists('CF_Admin')) {
 		}
 	}
 
-	load_plugin_textdomain('cf-wpplugin-admin-ui', false, 'CF_ADMIN_DIR');
+	//load_plugin_textdomain('cf-wpplugin-admin-ui', false, 'CF_ADMIN_DIR');
 
 	Class CF_Admin {
 				
 		function path_to_adminui() {
-			return trailingslashit(WP_PLUGIN_URL) . CF_ADMIN_DIR;
+			return trailingslashit(WP_PLUGIN_DIR) . CF_ADMIN_DIR;
 		}
 		
 		function url_to_adminui() {
@@ -242,8 +242,7 @@ if (!class_exists('CF_Admin')) {
 			return;
 		}
 		
-// rename method -  activate plugin on blog creation?
-		function activate_for_new_blog($file, $blog_id, $single_activation) {
+		function activate_plugin_for_new_blog($file, $blog_id, $single_activation) {
 			if (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network(plugin_basename($file))) {
 				switch_to_blog($blog_id);
 				if (function_exists($single_activation)) {
