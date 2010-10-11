@@ -212,7 +212,7 @@ if (!class_exists('CF_Admin')) {
 			return function_exists('is_multisite') && is_multisite();
 		}
 		
-		function network_activation() {
+		function is_network_activation() {
 			return isset($_GET['networkwide']) && ($_GET['networkwide'] == 1);
 		}
 		
