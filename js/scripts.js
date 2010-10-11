@@ -59,10 +59,10 @@ jQuery(function($) {
 		$(this).addClass('current');
 		
 		var tab_div = $(this).parent().attr('id').replace('cf-tab-', '');
-// use classes for selector
+
 		$('.cf-content').hide();
 		$('.cf-tab-content-'+tab_div).show();
-		
+		$('div.cf-updated').hide();
 	});
 
 	
