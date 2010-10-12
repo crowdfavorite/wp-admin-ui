@@ -183,29 +183,28 @@ if (!class_exists('CF_Admin')) {
 		
 		function update_settings($settings) {
 			foreach ($settings as $key => $option) {
-				$value = '';
-				switch ($option['type']) {
-					case 'int':
-						$value = intval($_POST[$key]);
-						break;
-					case 'select': // handles single option selection only
-						$test = stripslashes($_POST[$key]);
-						if (isset($option['options'][$test])) {
-							$value = $test;
-						}
-						break;
-					case 'checkbox':
-						$value = stripslashes(implode(',',$_POST[$key]));
-						break;
-					case 'radio':
-					case 'string':
-					case 'textarea':
-					default:
-						$value = stripslashes($_POST[$key]);
-						break;
-				}
-				if (get_option($option[$key]) && empty($value)) {
-					$value = $option['default'];
+				$value = $option['default'];
+				if (isset($_POST[$key])) {
+					switch ($option['type']) {
+						case 'int':
+							$value = intval($_POST[$key]);
+							break;
+						case 'select': // handles single option selection only
+							$test = stripslashes($_POST[$key]);
+							if (isset($option['options'][$test])) {
+								$value = $test;
+							}
+							break;
+						case 'checkbox':
+							$value = stripslashes(implode(',',$_POST[$key]));
+							break;
+						case 'radio':
+						case 'string':
+						case 'textarea':
+						default:
+							$value = stripslashes($_POST[$key]);
+							break;
+					}
 				}
 				update_option($key, $value);
 			}
