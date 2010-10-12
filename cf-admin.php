@@ -222,7 +222,7 @@ if (!class_exists('CF_Admin')) {
 //The wp get_blog_list function was deprecated in 3.0 without a replacement
 		function get_site_blogs() {
 			global $wpdb;
-			if ($wpdb->query("SHOW TABLES LIKE $wpdb->blogs")) {			
+			if ($wpdb->query("SHOW TABLES LIKE '$wpdb->blogs'")) {						
 				return $wpdb->get_col("
 					SELECT blog_id
 					FROM $wpdb->blogs
