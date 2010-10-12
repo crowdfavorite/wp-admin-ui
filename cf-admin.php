@@ -152,8 +152,8 @@ if (!class_exists('CF_Admin')) {
 					$output .= '<ul>';
 					foreach ($config['options'] as $opt_key => $opt_val) {
 						$output .= '<li>';
-						$output .= '<input id="'.$opt_key.'-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$opt_key.'" value="'.$opt_key.'"'.checked( $value, $opt_key).' />';
-						$output .= '<label for="'.$opt_key.'-'.$opt_val.'" class="cf-lbl-radio"> '.$opt_val.'</label>';
+						$output .= '<input id="'.$key.'-'.$opt_val.'" type="radio" class="cf-elm-radio" name="'.$key.'" value="'.$opt_key.'"'.checked( $value, $opt_key, false).' />';
+						$output .= '<label for="'.$key.'-'.$opt_val.'" class="cf-lbl-radio"> '.$opt_val.'</label>';
 						$output .= '</li>';
 					}
 					$output .= '</ul>';
@@ -203,7 +203,7 @@ if (!class_exists('CF_Admin')) {
 						$value = stripslashes($_POST[$key]);
 						break;
 				}
-				if (empty($value)) {
+				if (get_option($option[$key]) && empty($value)) {
 					$value = $option['default'];
 				}
 				update_option($key, $value);
