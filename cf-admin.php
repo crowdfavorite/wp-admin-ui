@@ -112,19 +112,20 @@ if (!class_exists('CF_Admin')) {
 		function display_settings($settings) {
 			foreach ($settings as $key => $config) {
 				$value = get_option($key);
-				if (empty($value)) {
+				if (!isset($value)) {
 					$value = $settings[$key]['default'];
 				}
 				if (is_array($value)) {
 					$value = implode("\n", $value);
 				}
+
 				echo self::settings_field($key, $config, $value);
 			}
 		}
 
 		function settings_field($key, $config, $value) {
 			$help = $config['help'];
-			
+
 			empty($config['label_class']) ? $label_class = '' :  $label_class = ' '.$config['label_class'];
 			empty($config['input_class']) ? $input_class = '' : $input_class = ' '.$config['input_class'];
 			empty($config['help_class']) ? $help_class = '' :  $help_class = ' '.$config['help_class'];
