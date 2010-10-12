@@ -203,6 +203,9 @@ if (!class_exists('CF_Admin')) {
 						$value = stripslashes($_POST[$key]);
 						break;
 				}
+				if (empty($value)) {
+					$value = $option['default'];
+				}
 				update_option($key, $value);
 			}
 		}
@@ -234,7 +237,7 @@ if (!class_exists('CF_Admin')) {
 			$blogs = self::get_site_blogs();
 			foreach ($blogs as $blog_id) {
 				switch_to_blog($blog_id);
-				if (function_exists($single_activation)) {
+				if (!empty($single_activation) && function_exists($single_activation)) {
 					call_user_func($single_activation);
 				}
 				restore_current_blog();
