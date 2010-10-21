@@ -78,20 +78,20 @@ if (!class_exists('CF_Admin')) {
 			echo get_support_button($plugin_name, $plugin_version);
 		}
 				
-		static function start_form($plugin_slug) {
+		static function start_form($plugin_prefix) {
 			include 'includes/cf-start-form.php';
 		}
 		
-		static function end_form_submit($plugin_slug, $text_domain) {
+		static function end_form_submit($plugin_prefix, $text_domain) {
 			include 'includes/cf-end-form-submit.php';
 		}
 		
-		static function settings_form($settings, $plugin_slug, $text_domain) {
-			self::start_form($plugin_slug);
+		static function settings_form($settings, $plugin_prefix, $text_domain) {
+			self::start_form($plugin_prefix);
 			echo '<fieldset class="cf-lbl-pos-left">';
-			self::display_settings($settings, $plugin_slug);
+			self::display_settings($settings, $plugin_prefix);
 			echo '</fieldset>';
-			self::end_form_submit($plugin_slug, $text_domain);
+			self::end_form_submit($plugin_prefix, $text_domain);
 		}
 		
 		static function load_css() {
@@ -107,8 +107,13 @@ if (!class_exists('CF_Admin')) {
 			wp_enqueue_script('cf_js_script', $js_url.'scripts.js', array('jquery'));
 		}
 		
-		static function display_settings($settings, $plugin_slug) {
-			$options = unserialize(get_option($plugin_slug.'_options'));
+		static function get_setting($setting_name, $plugin_prefix) {
+			$options = get_option($plugin_prefix.'_options');
+			return $options[$setting_name];
+		}
+		
+		static function display_settings($settings, $plugin_prefix) {
+			$options = unserialize(get_option($plugin_prefix.'_options'));
 
 			foreach ($settings as $key => $config) {
 				$value = $options[$key];
@@ -118,7 +123,6 @@ if (!class_exists('CF_Admin')) {
 				if (is_array($value)) {
 					$value = implode("\n", $value);
 				}
-
 				echo self::settings_field($key, $config, $value);
 			}
 		}
@@ -181,7 +185,7 @@ if (!class_exists('CF_Admin')) {
 			return $output.'<span class="cf-elm-help'.$help_class.'">'.$help.'</span></div>';
 		}
 		
-		static function update_settings($settings, $plugin_slug) {
+		static function update_settings($settings, $plugin_prefix) {
 			$options_arr = array();
 			foreach ($settings as $key => $option) {
 				$value = $option['default'];
@@ -202,10 +206,9 @@ if (!class_exists('CF_Admin')) {
 							break;
 					}
 				}
-				//update_option($key, $value);
-				$options_arr['key'] = $value;
+				$options_arr[$key] = $value;
 			}
-			update_option($plugin_slug.'_options', serialize($options_arr));
+			update_option($plugin_prefix.'_options', serialize($options_arr));
 		}
 		
 //Multisite
