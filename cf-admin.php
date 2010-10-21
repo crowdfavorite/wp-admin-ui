@@ -11,19 +11,17 @@ if (!class_exists('CF_Admin')) {
 		}
 	}
 
-	//load_plugin_textdomain('cf-wpplugin-admin-ui', false, 'CF_ADMIN_DIR');
-
 	Class CF_Admin {
 				
-		function path_to_adminui() {
-			return trailingslashit(WP_PLUGIN_DIR) . CF_ADMIN_DIR;
+		static function path_to_adminui() {
+			return trailingslashit(WP_PLUGIN_DIR).CF_ADMIN_DIR;
 		}
 		
-		function url_to_adminui() {
-			return trailingslashit(WP_PLUGIN_URL) . CF_ADMIN_DIR;
+		static function url_to_adminui() {
+			return trailingslashit(WP_PLUGIN_URL).CF_ADMIN_DIR;
 		}
 		
-		function admin_header($title, $plugin_name, $plugin_version, $textdomain) {
+		static function admin_header($title, $plugin_name, $plugin_version, $textdomain) {
 			if (isset($_GET['message'])) {
 				echo ('
 <div class="cf-updated updated inline">
@@ -41,7 +39,7 @@ if (!class_exists('CF_Admin')) {
 			echo '<h2>'.esc_html($title).' '.self::get_support_button($plugin_name, $plugin_version).'</h2>';
 		}
 		
-		function admin_tabs($titles) {
+		static function admin_tabs($titles) {
 			if (count($titles)) {
 				echo '<ul id="cf-nav" class="cf-clearfix">';
 				
@@ -54,7 +52,7 @@ if (!class_exists('CF_Admin')) {
 			}
 		}
 		
-		function plugin_action_links($links, $file, $plugin_php_file, $textdomain) {
+		static function plugin_action_links($links, $file, $plugin_php_file, $textdomain) {
 			$plugin_file = basename($plugin_php_file);
 			if (basename($file) == $plugin_file) {
 				$settings_link = '<a href="'. admin_url('options-general.php?page='.$plugin_file).'">'.__('Settings', $textdomain).'</a>';
@@ -63,8 +61,8 @@ if (!class_exists('CF_Admin')) {
 			return $links;
 		}
 		
-		function callouts($textdomain) {
-			$img_dir_url = self::url_to_adminui() . 'img/';
+		static function callouts($textdomain) {
+			$img_dir_url = self::url_to_adminui().'img/';
 		
 			echo '<div id="cf-callouts">';
 			include 'includes/cf-callout.php';
@@ -72,48 +70,50 @@ if (!class_exists('CF_Admin')) {
 			echo '</div><!-- #cf-callouts -->';
 		}
 				
-		function get_support_button($plugin_name, $plugin_version) {
+		static function get_support_button($plugin_name, $plugin_version) {
 			return '<script type="text/javascript">var WPHC_AFF_ID = "14303"; var WPHC_POSITION = "c1"; var WPHC_PRODUCT = "'.esc_js($product).' '.esc_js($plugin_version).'"; var WPHC_WP_VERSION = "'.esc_js($wp_version).'";</script><script type="text/javascript" src="http://cloud.wphelpcenter.com/support-form/0001/deliver-a.js"></script>';
 		}
 		
-		function support_button($plugin_name, $plugin_version) {
+		static function support_button($plugin_name, $plugin_version) {
 			echo get_support_button($plugin_name, $plugin_version);
 		}
 				
-		function start_form($plugin_slug) {
+		static function start_form($plugin_slug) {
 			include 'includes/cf-start-form.php';
 		}
 		
-		function end_form_submit($plugin_slug, $text_domain) {
+		static function end_form_submit($plugin_slug, $text_domain) {
 			include 'includes/cf-end-form-submit.php';
 		}
 		
-		function settings_form($settings, $plugin_slug, $text_domain) {
+		static function settings_form($settings, $plugin_slug, $text_domain) {
 			self::start_form($plugin_slug);
 			echo '<fieldset class="cf-lbl-pos-left">';
-			self::display_settings($settings);
+			self::display_settings($settings, $plugin_slug);
 			echo '</fieldset>';
 			self::end_form_submit($plugin_slug, $text_domain);
 		}
 		
-		function load_css() {
-			$css_url = self::url_to_adminui() . 'css/';
-			wp_enqueue_style('cf_styles', $css_url . 'styles.css');
-			wp_enqueue_style('cf_form_elements', $css_url . 'form-elements.css');
-			wp_enqueue_style('cf_utility', $css_url . 'utility.css');
+		static function load_css() {
+			$css_url = self::url_to_adminui().'css/';
+			wp_enqueue_style('cf_styles', $css_url.'styles.css');
+			wp_enqueue_style('cf_form_elements', $css_url.'form-elements.css');
+			wp_enqueue_style('cf_utility', $css_url.'utility.css');
 		}
 		
-		function load_js() {
-			$js_url = self::url_to_adminui() . 'js/';
+		static function load_js() {
+			$js_url = self::url_to_adminui().'js/';
 			wp_enqueue_script('cf_admin_cookie_js', $js_url .'jquery.cookie.js', array('jquery'));
 			wp_enqueue_script('cf_js_script', $js_url.'scripts.js', array('jquery'));
 		}
 		
-		function display_settings($settings) {
+		static function display_settings($settings, $plugin_slug) {
+			$options = unserialize(get_option($plugin_slug.'_options'));
+
 			foreach ($settings as $key => $config) {
-				$value = get_option($key);
+				$value = $options[$key];
 				if (!isset($value)) {
-					$value = $settings[$key]['default'];
+					$value = $options[$key]['default'];
 				}
 				if (is_array($value)) {
 					$value = implode("\n", $value);
@@ -123,7 +123,7 @@ if (!class_exists('CF_Admin')) {
 			}
 		}
 
-		function settings_field($key, $config, $value) {
+		static function settings_field($key, $config, $value) {
 			$help = $config['help'];
 
 			empty($config['label_class']) ? $label_class = '' :  $label_class = ' '.$config['label_class'];
@@ -181,7 +181,8 @@ if (!class_exists('CF_Admin')) {
 			return $output.'<span class="cf-elm-help'.$help_class.'">'.$help.'</span></div>';
 		}
 		
-		function update_settings($settings) {
+		static function update_settings($settings, $plugin_slug) {
+			$options_arr = array();
 			foreach ($settings as $key => $option) {
 				$value = $option['default'];
 				if (isset($_POST[$key])) {
@@ -189,15 +190,10 @@ if (!class_exists('CF_Admin')) {
 						case 'int':
 							$value = intval($_POST[$key]);
 							break;
-						case 'select': // handles single option selection only
-							$test = stripslashes($_POST[$key]);
-							if (isset($option['options'][$test])) {
-								$value = $test;
-							}
-							break;
 						case 'checkbox':
 							$value = stripslashes(implode(',',$_POST[$key]));
 							break;
+						case 'select': // handles single option selection only
 						case 'radio':
 						case 'string':
 						case 'textarea':
@@ -206,21 +202,23 @@ if (!class_exists('CF_Admin')) {
 							break;
 					}
 				}
-				update_option($key, $value);
+				//update_option($key, $value);
+				$options_arr['key'] = $value;
 			}
+			update_option($plugin_slug.'_options', serialize($options_arr));
 		}
 		
 //Multisite
-		function is_multisite() {
+		static function is_multisite() {
 			return function_exists('is_multisite') && is_multisite();
 		}
 		
-		function is_network_activation() {
+		static function is_network_activation() {
 			return isset($_GET['networkwide']) && ($_GET['networkwide'] == 1);
 		}
 		
 //The wp get_blog_list function was deprecated in 3.0 without a replacement
-		function get_site_blogs() {
+		static function get_site_blogs() {
 			global $wpdb;
 			if ($wpdb->query("SHOW TABLES LIKE '$wpdb->blogs'")) {						
 				return $wpdb->get_col("
@@ -233,7 +231,7 @@ if (!class_exists('CF_Admin')) {
 			return;
 		}
 		
-		function activate_for_network($single_activation) {
+		static function activate_for_network($single_activation) {
 			$blogs = self::get_site_blogs();
 			foreach ($blogs as $blog_id) {
 				switch_to_blog($blog_id);
@@ -245,7 +243,7 @@ if (!class_exists('CF_Admin')) {
 			return;
 		}
 		
-		function activate_plugin_for_new_blog($file, $blog_id, $single_activation) {
+		static function activate_plugin_for_new_blog($file, $blog_id, $single_activation) {
 			if (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network(plugin_basename($file))) {
 				switch_to_blog($blog_id);
 				if (function_exists($single_activation)) {
