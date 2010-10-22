@@ -187,8 +187,15 @@ if (!class_exists('CF_Admin')) {
 		
 		static function update_settings($settings, $plugin_prefix) {
 			$options_arr = array();
+			$options = unserialize(get_option($plugin_prefix.'_options'));
 			foreach ($settings as $key => $option) {
-				$value = $option['default'];
+				if (!empty($options[$key])) {
+					$value = $options[$key];
+				}
+				else {
+					$value = $option['default'];
+				}
+
 				if (isset($_POST[$key])) {
 					switch ($option['type']) {
 						case 'int':
