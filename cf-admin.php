@@ -77,7 +77,7 @@ if (!class_exists('CF_Admin')) {
 		static function support_button($plugin_name, $plugin_version) {
 			echo get_support_button($plugin_name, $plugin_version);
 		}
-				
+		
 		static function start_form($plugin_prefix) {
 			include 'includes/cf-start-form.php';
 		}
@@ -108,7 +108,7 @@ if (!class_exists('CF_Admin')) {
 		}
 		
 		static function get_setting($setting_name, $plugin_prefix) {
-			$options = get_option($plugin_prefix.'_options');
+			$options = unserialize(get_option($plugin_prefix.'_options'));
 			return $options[$setting_name];
 		}
 		
