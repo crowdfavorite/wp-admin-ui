@@ -26,7 +26,7 @@
 	-webkit-border-radius: 5px;
 }
 #cf form .cf-elm-block:hover {
-	background-color: #111;
+	background-color: #f3f3f3;
 }
 #cf form .cf-elm-block.no-hover,
 #cf form .no-hover .cf-elm-block:hover {
