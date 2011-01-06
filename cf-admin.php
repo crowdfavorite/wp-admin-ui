@@ -105,7 +105,7 @@ if (!class_exists('CF_Admin')) {
 		static function load_js() {
 			$js_url = self::url_to_adminui().'js/';
 			wp_enqueue_script('cf_admin_cookie_js', $js_url .'jquery.cookie.js', array('jquery'));
-			wp_enqueue_script('cf_js_script', $js_url.'scripts.js', array('jquery'));
+			wp_enqueue_script('cf_js_script', $js_url.'cf-admin.js', array('jquery'));
 		}
 		
 		static function get_setting($setting_name, $plugin_prefix) {
@@ -114,8 +114,8 @@ if (!class_exists('CF_Admin')) {
 		}
 		
 		static function display_settings($settings, $plugin_prefix) {
+			echo 'hiii';
 			$options = unserialize(get_option($plugin_prefix.'_options'));
-
 			foreach ($settings as $key => $config) {
 				$value = $options[$key];
 				if (!isset($value)) {

@@ -116,7 +116,7 @@
 #cf-callouts {
 	background: url('../img/border-fade-sprite.gif') 0 0 repeat-x;
 	float: left;
-	margin: 18px 0;
+	margin: 18px 15px 0 0;
 }
 .cf-callout {
 	float: left;
