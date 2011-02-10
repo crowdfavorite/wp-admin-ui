@@ -14,11 +14,23 @@ if (!class_exists('CF_Admin')) {
 	Class CF_Admin {
 				
 		static function path_to_adminui() {
-			return trailingslashit(WP_PLUGIN_DIR).CF_ADMIN_DIR;
+			if (is_dir(trailingslashit(WP_PLUGIN_DIR).CF_ADMIN_DIR)) {
+				return trailingslashit(WP_PLUGIN_DIR).CF_ADMIN_DIR;
+			}
+			else if (is_dir(trailingslashit(TEMPLATEPATH).'plugins/'.CF_ADMIN_DIR)) {
+				return trailingslashit(TEMPLATEPATH).'plugins/'.CF_ADMIN_DIR;
+			}
+			return false;
 		}
 		
 		static function url_to_adminui() {
-			return trailingslashit(WP_PLUGIN_URL).CF_ADMIN_DIR;
+			if (is_dir(trailingslashit(WP_PLUGIN_DIR).CF_ADMIN_DIR)) {
+				return trailingslashit(WP_PLUGIN_URL).CF_ADMIN_DIR;
+			}
+			else if (is_dir(trailingslashit(TEMPLATEPATH).'plugins/'.CF_ADMIN_DIR)) {
+				return trailingslashit(get_bloginfo('template_url')).'plugins/'.CF_ADMIN_DIR;
+			}
+			return false;
 		}
 		
 		static function admin_header($title, $plugin_name, $plugin_version, $textdomain) {
