@@ -126,7 +126,6 @@ if (!class_exists('CF_Admin')) {
 		}
 		
 		static function display_settings($settings, $plugin_prefix) {
-			echo 'hiii';
 			$options = unserialize(get_option($plugin_prefix.'_options'));
 			foreach ($settings as $key => $config) {
 				$value = $options[$key];
