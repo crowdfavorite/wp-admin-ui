@@ -118,7 +118,7 @@ if (!class_exists('CF_Admin')) {
 			foreach ($settings as $key => $config) {
 				$value = $options[$key];
 				if (!isset($value)) {
-					$value = $options[$key]['default'];
+					$value = $settings[$key]['default'];
 				}
 				if (is_array($value)) {
 					$value = implode("\n", $value);
