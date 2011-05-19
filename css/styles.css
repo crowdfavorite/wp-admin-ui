@@ -12,30 +12,16 @@
 	font-weight: bold;
 	padding-bottom: 5px;	
 }
-.wphc-support-btn {
-	display: block;
-	background: url(../img/support-btn.gif) 0 0 no-repeat;
-	height: 18px;
-	overflow: hidden;
-	position: absolute;
-	text-indent: -999em;
-	top: 0;
-	right: 0;
-	width: 70px;
-}
-.wphc-support-btn:hover {
-	background-position: -70px 0;
-}
-#cf-nav {
+.cf-nav-tabs {
 	list-style-type: none;
 	margin: 0px 10px 0 10px;
 }
-#cf-nav li,
-#cf-nav a {
+.cf-nav-tabs li,
+.cf-nav-tabs a {
 	float: left;
 	margin: 0;
 }
-#cf-nav a {
+.cf-nav-tabs a {
 	display: block;
 	color: #999;
 	background-color: #efefef;
@@ -58,10 +44,10 @@
 	border-top-right-radius: 5px;
 	
 }
-#cf-nav a:hover {
+.cf-nav-tabs a:hover {
 	color: #777;
 }
-#cf-nav a.current {
+.cf-nav-tabs a.current {
 	background: url('../img/tab-bg.gif') 0 0 repeat-x;
 	border: 1px solid #c7c7c7;
 	border-bottom: 0;
@@ -77,41 +63,6 @@
 	margin: 18px 0;
 }
 
-/* wphc-widget */
-#wphc-widget {
-	background-position: 0 100%;
-	margin-bottom: 18px;
-	padding: 0;
-	position: relative;
-}
-#wphc-widget .wphc-content {
-	background: url('../img/lifering.png') 16px 2px no-repeat;
-	padding: 4px 15px 3px 130px;
-}
-#wphc-widget strong {
-	font-size: 16px;
-	margin-right: 1em;
-}
-#wphc-widget strong a {
-	color: #8b2828;
-	text-decoration: none;
-}
-#wphc-widget strong a:hover {
-	text-decoration: underline;
-}
-#wphc-widget #wphc-close {
-	background: url('../img/close-x.gif') 0 0 no-repeat;
-	height: 9px;
-	position: absolute;
-	overflow: hidden;
-	text-indent: -999px;
-	top: 10px;
-	right: 10px;
-	width: 8px;
-}
-#wphc-widget #wphc-close:hover {
-	background-position: -8px 0;
-}
 /* Developed by and Support by callouts */
 #cf-callouts {
 	background: url('../img/border-fade-sprite.gif') 0 0 repeat-x;
@@ -130,6 +81,7 @@
 	background: #193542 url('../img/box-sprite.png') 0 0 repeat-x;
 	border-bottom: 1px solid #0C1A21;
 }
+/* TODO - replace with ad widget
 #cf-callout-support {
 	margin-left: 9px;
 }
@@ -137,7 +89,7 @@
 	background: #8D2929 url('../img/box-sprite.png') 0 -200px repeat-x;
 	border-bottom: 1px solid #461414;
 }
-
+*/
 
 /* General cf-box styles */
 .cf-box { 

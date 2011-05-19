@@ -1,5 +1,5 @@
-<?php
-if (!class_exists('CF_Admin')) {
+<?php if (!class_exists('CF_Admin')) {
+
 
 	if (!defined('CF_ADMIN_DIR')) {
 		$plugin_dir = basename( dirname( dirname(__FILE__)));
@@ -10,6 +10,8 @@ if (!class_exists('CF_Admin')) {
 			define('CF_ADMIN_DIR', trailingslashit(basename( dirname( dirname(__FILE__)))).'cf-admin/');		
 		}
 	}
+
+	add_action('admin_body_class', array('CF_Admin', 'wp_admin_version_body_class'));
 
 	Class CF_Admin {
 				
@@ -53,11 +55,11 @@ if (!class_exists('CF_Admin')) {
 		
 		static function admin_tabs($titles) {
 			if (count($titles)) {
-				echo '<ul id="cf-nav" class="cf-clearfix">';
+				echo '<ul class="cf-nav-tabs cf-clearfix">';
 				
 				$i = 1;
 				foreach ($titles as $title) {
-					echo '<li id="cf-tab-'.$i.'" class="cf-tab"><a href="#">'.esc_html($title).'</a></li>';
+					echo '<li class="cf-tab cf-tab-'.$i.'"><a href="#">'.esc_html($title).'</a></li>';
 					$i++;
 				}
 				echo '</ul>';
@@ -78,19 +80,10 @@ if (!class_exists('CF_Admin')) {
 		
 			echo '<div id="cf-callouts">';
 			include 'includes/cf-callout.php';
-			include 'includes/wphc-callout.php';
+// TODO - ad callout
 			echo '</div><!-- #cf-callouts -->';
 		}
 				
-		static function get_support_button($plugin_name, $plugin_version) {
-			global $wp_version;
-			return '<script type="text/javascript">var WPHC_AFF_ID = "14303"; var WPHC_POSITION = "c1"; var WPHC_PRODUCT = "'.esc_js($plugin_name).' '.esc_js($plugin_version).'"; var WPHC_WP_VERSION = "'.esc_js($wp_version).'";</script><script type="text/javascript" src="http://cloud.wphelpcenter.com/support-form/0001/deliver-a.js"></script>';
-		}
-		
-		static function support_button($plugin_name, $plugin_version) {
-			echo get_support_button($plugin_name, $plugin_version);
-		}
-		
 		static function start_form($plugin_prefix) {
 			include 'includes/cf-start-form.php';
 		}
@@ -116,8 +109,38 @@ if (!class_exists('CF_Admin')) {
 		
 		static function load_js() {
 			$js_url = self::url_to_adminui().'js/';
-			wp_enqueue_script('cf_admin_cookie_js', $js_url .'jquery.cookie.js', array('jquery'));
 			wp_enqueue_script('cf_js_script', $js_url.'cf-admin.js', array('jquery'));
+		}
+
+		static function wp_admin_version_body_class($class_str) {
+			global $wp_version;
+			$version = $wp_version;
+// strip off any dash stuff (3.2-beta1-12345)
+			if (($pos = strpos($version, '-')) !== false) {
+				$version = substr($version, 0, $pos);
+			}
+			$classes = array();
+// specific version class (3.0.1)
+			$classes[] = 'v-'.str_replace('.', '-', $version);
+// general version class (3.0)
+			$classes[] = 'v-'.str_replace('.', '-', substr($version, 0, 3));
+// generations
+			if (version_compare($version, '3.2', '>=')) { // sidebar refresh
+				$classes[] = 'ui-gen-5';
+			}
+			else if (version_compare($version, '2.7', '>=')) { // dark header/footer (and light, changed in 3.0)
+				$classes[] = 'ui-gen-4';
+			}
+			else if (version_compare($version, '2.4', '>=')) { // Happy Cog
+				$classes[] = 'ui-gen-3';
+			}
+			else if (version_compare($version, '2.0', '>=')) { // blue header
+				$classes[] = 'ui-gen-2';
+			}
+			else { // old school
+				$classes[] = 'ui-gen-1';
+			}
+			return $class_str.' '.implode(' ', array_unique($classes));
 		}
 		
 		static function get_setting($setting_name, $plugin_prefix) {
@@ -230,7 +253,7 @@ if (!class_exists('CF_Admin')) {
 			update_option($plugin_prefix.'_options', serialize($options_arr));
 		}
 		
-//Multisite
+// Multisite
 		static function is_multisite() {
 			return function_exists('is_multisite') && is_multisite();
 		}
@@ -239,7 +262,7 @@ if (!class_exists('CF_Admin')) {
 			return isset($_GET['networkwide']) && ($_GET['networkwide'] == 1);
 		}
 		
-//The wp get_blog_list function was deprecated in 3.0 without a replacement
+// The wp get_blog_list function was deprecated in 3.0 without a replacement
 		static function get_site_blogs() {
 			global $wpdb;
 			if ($wpdb->query("SHOW TABLES LIKE '$wpdb->blogs'")) {						
@@ -275,5 +298,5 @@ if (!class_exists('CF_Admin')) {
 			}		
 		}
 	}
-}
-?>
+
+} // end class-exists check ?>
