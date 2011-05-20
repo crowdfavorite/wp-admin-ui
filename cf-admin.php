@@ -102,9 +102,7 @@
 		
 		static function load_css() {
 			$css_url = self::url_to_adminui().'css/';
-			wp_enqueue_style('cf_styles', $css_url.'styles.css');
-			wp_enqueue_style('cf_form_elements', $css_url.'form-elements.css');
-			wp_enqueue_style('cf_utility', $css_url.'utility.css');
+			wp_enqueue_style('cf_styles', $css_url.'css.php');
 		}
 		
 		static function load_js() {
