@@ -14,7 +14,7 @@
 }
 #cf h2,
 #cf h3 {
-	margin: 1.5em 0 1em 0;
+	margin: 2em 0 1em 0;
 	padding: 0;
 }
 #cf hr {
@@ -298,20 +298,17 @@
 
 /* notifications */
 .cf-error { 
-	background:#fbe3e4 !important; 
-	color:#8a1f11;
+	background: #ffebe8; 
+	color: #8a1f11;
 }
 .cf-notice { 
-	background:#fff6bf !important;
+	background: #ffffe0;
 	color:#514721;
 }
 .cf-success {
-	background:#e4ffc9 !important;
-	color:#264409;
+	background: #e4ffc9 !important;
+	color: #264409;
 }
-.cf-error a { color:#8a1f11; }
-.cf-notice a { color:#514721; }
-.cf-success a { color:#264409; }
 
 
 /** Credits and Support Callouts
