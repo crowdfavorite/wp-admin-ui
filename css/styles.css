@@ -318,17 +318,19 @@
 	float: left;
 	margin: 18px 15px 0 0;
 }
-.cf-callout {
+.cf-callout,
+#cf .cf-callout {
 	float: left;
 	margin-top: 18px;
 	width: 50%;
 }
-#cf-callout-credit {
-	margin-right: 9px;
-}
-#cf-callout-credit .cf-box-title {
+.cf-box-title,
+#cf .cf-box-title {
 	background: #193542 url('../img/box-sprite.png') 0 0 repeat-x;
 	border-bottom: 1px solid #0C1A21;
+}
+#cf-callout-credit {
+	margin-right: 9px;
 }
 /* TODO - replace with ad widget
 #cf-callout-support {
@@ -340,7 +342,8 @@
 }
 */
 /* General cf-box styles */
-.cf-box { 
+.cf-box,
+#cf .cf-box { 
 	background: #EFEFEF url('../img/box-sprite.png ') 0 -400px repeat-x;
 	border: 1px solid #E3E3E3;
 	border-radius: 5px;
@@ -348,7 +351,8 @@
 	-webkit-border-radius: 5px;
 	-khtml-border-radius: 5px;
 }
-.cf-box .cf-box-title {
+.cf-box .cf-box-title,
+#cf .cf-box-title {
 	color: #fff;
 	font-size: 14px;
 	font-weight: normal;
