@@ -26,6 +26,10 @@
 		}
 		
 		static function url_to_adminui() {
+			if ( strpos( CF_ADMIN_DIR, plugins_url() ) !== false ) {
+				return CF_ADMIN_DIR;
+			}
+
 			if (is_dir(trailingslashit(WP_PLUGIN_DIR).CF_ADMIN_DIR)) {
 				return  preg_replace('#^https?://#i', '//', trailingslashit(WP_PLUGIN_URL).CF_ADMIN_DIR);
 			}
