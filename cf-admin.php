@@ -18,7 +18,7 @@
 		static function path_to_adminui() {
 			if ( is_dir( trailingslashit( WP_PLUGIN_DIR ) . CF_ADMIN_DIR ) ) {
 				return trailingslashit( WP_PLUGIN_DIR ) . CF_ADMIN_DIR;
-			} else if ( is_dir( trailingslashit( TEMPLATEPATH ) . 'plugins/' . CF_ADMIN_DIR ) ) {
+			} elseif ( is_dir( trailingslashit( TEMPLATEPATH ) . 'plugins/' . CF_ADMIN_DIR ) ) {
 				return trailingslashit( TEMPLATEPATH ) . 'plugins/' . CF_ADMIN_DIR;
 			}
 
@@ -28,9 +28,9 @@
 		static function url_to_adminui() {
 			if ( strpos( CF_ADMIN_DIR, plugins_url() ) !== false ) {
 				return CF_ADMIN_DIR;
-			} else if ( is_dir( trailingslashit( WP_PLUGIN_DIR ) . CF_ADMIN_DIR ) ) {
+			} elseif ( is_dir( trailingslashit( WP_PLUGIN_DIR ) . CF_ADMIN_DIR ) ) {
 				return preg_replace( '#^https?://#i', '//', trailingslashit( WP_PLUGIN_URL ) . CF_ADMIN_DIR );
-			} else if ( is_dir( trailingslashit( TEMPLATEPATH ) . 'plugins/' . CF_ADMIN_DIR ) ) {
+			} elseif ( is_dir( trailingslashit( TEMPLATEPATH ) . 'plugins/' . CF_ADMIN_DIR ) ) {
 				return preg_replace( '#^https?://#i', '//', trailingslashit( get_bloginfo( 'template_url' ) ) . 'plugins/' . CF_ADMIN_DIR );
 			}
 
