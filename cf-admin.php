@@ -101,28 +101,26 @@
 		}
 		
 		static function load_css() {
-			$css_url = self::url_to_adminui().'css/';
-			wp_enqueue_style('cf_styles', $css_url.'css.php');
+			wp_enqueue_style( 'cf_styles', plugins_url( '/css/css.php', __FILE__ ) );
 		}
 		
 		static function load_js() {
-			$js_url = self::url_to_adminui().'js/';
-			wp_enqueue_script('cf_js_script', $js_url.'cf-admin.js', array('jquery'));
+			wp_enqueue_script( 'cf_js_script', plugins_url( '/js/cf-admin.js', __FILE__ ), array( 'jquery' ) );
 		}
 
 		static function wp_admin_version_body_class($class_str) {
 			global $wp_version;
 			$version = $wp_version;
-// strip off any dash stuff (3.2-beta1-12345)
+			// strip off any dash stuff (3.2-beta1-12345)
 			if (($pos = strpos($version, '-')) !== false) {
 				$version = substr($version, 0, $pos);
 			}
 			$classes = array();
-// specific version class (3.0.1)
+			// specific version class (3.0.1)
 			$classes[] = 'v-'.str_replace('.', '-', $version);
-// general version class (3.0)
+			// general version class (3.0)
 			$classes[] = 'v-'.str_replace('.', '-', substr($version, 0, 3));
-// generations
+			// generations
 			if (version_compare($version, '3.2', '>=')) { // sidebar refresh
 				$classes[] = 'ui-gen-5';
 			}
